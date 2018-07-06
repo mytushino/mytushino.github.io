@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    "C:\\Users\\serguei\\AppData\\Roaming\\npm\\node_modules\\babel-plugin-transform-async-to-generator",
+    "C:\\Users\\serguei\\AppData\\Roaming\\npm\\node_modules\\babel-plugin-transform-es2015-arrow-functions"
+  ]
+}
