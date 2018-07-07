@@ -24,7 +24,7 @@
 	"start_url": "https://mytushino.github.io/",
 	"display": "standalone",
 	"orientation": "any",
-	"ms_TileColor": "#F03B4C",
-	"theme_color": "#F03B4C",
-	"background_color": "#F03B4C"
+	"ms_TileColor": "#039be5",
+	"theme_color": "#039be5",
+	"background_color": "#039be5"
 }
