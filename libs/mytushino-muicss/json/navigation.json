@@ -32,34 +32,23 @@
 			"url": "./includes/mytushino-muicss/entertainment_and_media.html",
 			"title": "Развлечения"
 		}, {
+			"href": "#/food_retail_and_service",
+			"url": "./includes/mytushino-muicss/food_retail_and_service.html",
+			"title": "Питание"
+		}, {
 			"href": "#/contacts",
 			"url": "./includes/mytushino-muicss/contacts.html",
 			"title": "Контакты"
 		}
 	],
 	"more": [{
-			"href": "https://yandex.ru/maps/org/repetitor_sergey_shimanskiy/1085972151",
-			"title": "Яндекс.Карты"
-		}, {
-			"href": "http://podgotovka.ru/detail.php?siteid=4293",
-			"title": "Подготовка.Ру"
-		}, {
-			"href": "https://repforum.ru/viewtopic.php?t=2929",
-			"title": "Форум репетиторов"
-		}, {
-			"href": "https://englishextra.github.io/",
-			"title": "Мой сайт"
+			"href": "mailto:englishextra2%40yahoo.com?subject=%D0%9D%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%B2%D0%B0%D1%88%D0%B5%D0%B9%20%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8%20%28%D0%BC%D0%B0%D0%BA%D1%81.%2033%20%D0%B7%D0%BD%D0%B0%D0%BA%D0%B0%20%D1%81%20%D0%BF%D1%80%D0%BE%D0%B1%D0%B5%D0%BB%D0%B0%D0%BC%D0%B8%29&body=%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%B4%D0%B5%D1%8F%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8%2C%20%D0%B0%D0%B4%D1%80%D0%B5%D1%81%2C%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD",
+			"title": "Добавить бизнес"
 		}
 	],
 	"contacts": [{
-			"href": "https://vk.com/sergeydavydow",
+			"href": "https://vk.com/mytushino",
 			"title": "«ВКонтакте»"
-		}, {
-			"href": "https://www.instagram.com/shimanskybiz/",
-			"title": "Инстаграм"
-		}, {
-			"href": "https://twitter.com/englishextra",
-			"title": "Твиттер"
 		}
 	]
 }
