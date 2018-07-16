@@ -1346,7 +1346,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 				var timer = setTimeout(function () {
 						clearTimeout(timer);
 						timer = null;
-						logThis();
+						/* logThis(); */
 						mgrid.mount();
 						cb();
 					}, timeout);
@@ -1394,7 +1394,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 					if (keyHeight < height) {
 						clearInterval(timer);
 						timer = null;
-						logThis(timer, slot, height);
+						/* logThis(timer, slot, height); */
 						cb();
 					}
 				}, slot);
