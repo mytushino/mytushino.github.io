@@ -1816,7 +1816,7 @@ button {
  * make appbar dark
  */
 
-.mui-appbar {
+/* .mui-appbar {
 	color: #FFFFFF;
 	background-color: #2B2B2B;
 }
@@ -1831,13 +1831,13 @@ button {
 .mui-appbar .mui-dropdown__menu > li > a:active {
 	color: #2B2B2B;
 	background-color: #81d4fa;
-}
+} */
 
 /*!
  * make sidedrawer dark
  */
 
-#sidedrawer {
+/* #sidedrawer {
 	color: #FFFFFF;
 	background-color: #424242;
 }
@@ -1850,4 +1850,4 @@ button {
 #sidedrawer li > strong:hover,
 #sidedrawer li > strong:active {
 	color: #424242;
-}
+} */
