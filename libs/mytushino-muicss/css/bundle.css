@@ -1009,7 +1009,7 @@ button {
 	white-space: nowrap;
 }
 
-.card-wrap .contacts-buttons--phone:after {
+.contacts-buttons--phone:after {
 	content: "";
 	display: inline-block;
 	width: 1.500em;
@@ -1018,10 +1018,17 @@ button {
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	background-size: 1.500em 1.500em;
-	margin-top: 0.500em;
+	/*!
+	 * @see {@link https://www.w3.org/Style/Examples/007/center.en.html}
+	 */
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
-.card-wrap .contacts-buttons--map:after {
+.contacts-buttons--map:after {
 	content: "";
 	display: inline-block;
 	width: 1.500em;
@@ -1030,10 +1037,17 @@ button {
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	background-size: 1.500em 1.500em;
-	margin-top: 0.500em;
+	/*!
+	 * @see {@link https://www.w3.org/Style/Examples/007/center.en.html}
+	 */
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
-.card-wrap .contacts-buttons--web:after {
+.contacts-buttons--web:after {
 	content: "";
 	display: inline-block;
 	width: 1.500em;
@@ -1042,7 +1056,14 @@ button {
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	background-size: 1.500em 1.500em;
-	margin-top: 0.500em;
+	/*!
+	 * @see {@link https://www.w3.org/Style/Examples/007/center.en.html}
+	 */
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 /*!
