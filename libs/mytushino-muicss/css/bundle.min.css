@@ -1009,6 +1009,17 @@ button {
 	white-space: nowrap;
 }
 
+.office-hours,
+.office-address,
+.office-phone-qrcode {
+	font-size: 0.750rem;
+	line-height: 0.938rem;
+}
+
+.office-phone-qrcode img {
+	width: 9.000rem;
+}
+
 .contacts-buttons--phone:after {
 	content: "";
 	display: inline-block;
