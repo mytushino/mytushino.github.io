@@ -1602,6 +1602,13 @@ unescape, verge, VK, WheelIndicator, Ya*/
 		};
 
 		var manageReadMore = function () {
+			var rmLink = document[getElementsByClassName]("rm-link") || "";
+			var arrange = function (e) {
+				if (!e[classList].contains(isBindedClass)) {
+					e[classList].add(isBindedClass);
+					e[_addEventListener]("click", updateMinigrid);
+				}
+			};
 			var initScript = function () {
 				if (root.$readMoreJS) {
 					$readMoreJS.init({
@@ -1613,22 +1620,18 @@ unescape, verge, VK, WheelIndicator, Ya*/
 						inline: true,
 						customBlockElement: "p"
 					});
-					var rmLink = document[getElementsByClassName]("rm-link") || "";
-					if (rmLink) {
-						for (var i = 0, l = rmLink[_length]; i < l; i += 1) {
-							if (!rmLink[i][classList].contains(isBindedClass)) {
-								rmLink[i][classList].add(isBindedClass);
-								rmLink[i][_addEventListener]("click", updateMinigridThrottled);
-							}
-						}
+					for (var i = 0, l = rmLink[_length]; i < l; i += 1) {
+						arrange(rmLink[i]);
 					}
 				}
 			};
-			var timer = setTimeout(function () {
-					clearTimeout(timer);
-					timer = null;
-					initScript();
-				}, 100);
+			if (rmLink) {
+				var timer = setTimeout(function () {
+						clearTimeout(timer);
+						timer = null;
+						initScript();
+					}, 100);
+			}
 		};
 
 		var manageExpandingLayers = function () {
@@ -1640,7 +1643,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 					if (s) {
 						_this[classList].toggle(isActiveClass);
 						s[classList].toggle(isActiveClass);
-						updateMinigridThrottled();
+						updateMinigrid();
 					}
 					return;
 				};
