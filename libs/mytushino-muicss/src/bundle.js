@@ -2258,6 +2258,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 					if (dropdownContactsTemplate && dropdownContactsRender) {
 						insertFromTemplate(jsonResponse, dropdownContactsTemplateId, dropdownContactsRenderId, function () {
 							manageDropdownButtonAll();
+							manageExternalLinkAll();
 						}, true);
 					}
 					var dropdownAdsTemplateId = "template_dropdown_ads";
@@ -2274,6 +2275,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 					if (dropdownAdsTemplate && dropdownAdsRender) {
 						insertFromTemplate(jsonResponse, dropdownAdsTemplateId, dropdownAdsRenderId, function () {
 							manageDropdownButtonAll();
+							manageExternalLinkAll();
 						}, true);
 					}
 				},
