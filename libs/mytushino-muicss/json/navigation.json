@@ -56,6 +56,9 @@
 	"contacts": [{
 			"href": "https://vk.com/mytushino",
 			"title": "Паблик «ВК»"
+		}, {
+			"href": "tg://resolve?domain=mytushino",
+			"title": "Телеграм"
 		}
 	]
 }
