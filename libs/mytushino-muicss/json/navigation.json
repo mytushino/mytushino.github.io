@@ -12,6 +12,10 @@
 			"url": "./includes/mytushino-muicss/home.html",
 			"title": "Начало"
 		}, {
+			"href": "#/authorities",
+			"url": "./includes/mytushino-muicss/authorities.html",
+			"title": "Власти"
+		}, {
 			"href": "#/pets_and_animals",
 			"url": "./includes/mytushino-muicss/pets_and_animals.html",
 			"title": "Домашние животные"
