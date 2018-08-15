@@ -40,6 +40,10 @@
 			"url": "./includes/mytushino-muicss/food_retail_and_service.html",
 			"title": "Питание"
 		}, {
+			"href": "#/home_and_garden",
+			"url": "./includes/mytushino-muicss/home_and_garden.html",
+			"title": "Дом и сад"
+		}, {
 			"href": "#/services_other",
 			"url": "./includes/mytushino-muicss/services_other.html",
 			"title": "Другие услуги"
