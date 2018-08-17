@@ -48,6 +48,10 @@
 			"url": "./includes/mytushino-muicss/services_other.html",
 			"title": "Другие услуги"
 		}, {
+			"href": "#/about",
+			"url": "./includes/mytushino-muicss/about.html",
+			"title": "Об этом ресурсе"
+		}, {
 			"href": "#/contacts",
 			"url": "./includes/mytushino-muicss/contacts.html",
 			"title": "Контакты"
