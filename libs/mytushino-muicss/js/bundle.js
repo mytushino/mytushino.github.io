@@ -52,6 +52,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 			var docElem = document.documentElement || "";
 			var docBody = document.body || "";
 			var appendChild = "appendChild";
+			var classList = "classList";
 			var cloneNode = "cloneNode";
 			var createContextualFragment = "createContextualFragment";
 			var createDocumentFragment = "createDocumentFragment";
@@ -62,6 +63,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 			var replaceChild = "replaceChild";
 			var _addEventListener = "addEventListener";
 			var _length = "length";
+			var isBindedHandleRoutesWindowClass = "is-binded-handle-routes-window";
 			var insertExternalHTML = function (id, url, callback) {
 				var container = document[getElementById](id.replace(/^#/, "")) || "";
 				var arrange = function () {
@@ -190,7 +192,10 @@ unescape, verge, VK, WheelIndicator, Ya*/
 					}
 				};
 				handleRoutesWindow();
-				root[_addEventListener]("hashchange", handleRoutesWindow);
+				if (!docElem[classList].contains(isBindedHandleRoutesWindowClass)) {
+					docElem[classList].add(isBindedHandleRoutesWindowClass);
+					root[_addEventListener]("hashchange", handleRoutesWindow);
+				}
 			};
 			var render = document[getElementById](renderId) || "";
 			if (render) {
@@ -941,17 +946,17 @@ unescape, verge, VK, WheelIndicator, Ya*/
 			}
 		};
 
-		var handleExternalLink = function (url, ev) {
-			ev.stopPropagation();
-			ev.preventDefault();
-			var logicHandleExternalLink = openDeviceBrowser.bind(null, url);
-			var debounceLogicHandleExternalLink = debounce(logicHandleExternalLink, 200);
-			debounceLogicHandleExternalLink();
-		};
 		var manageExternalLinkAll = function (scope) {
 			var ctx = scope && scope.nodeName ? scope : "";
 			var linkTag = "a";
 			var linkAll = ctx ? ctx[getElementsByTagName](linkTag) || "" : document[getElementsByTagName](linkTag) || "";
+			var handleExternalLink = function (url, ev) {
+				ev.stopPropagation();
+				ev.preventDefault();
+				var logicHandleExternalLink = openDeviceBrowser.bind(null, url);
+				var debounceLogicHandleExternalLink = debounce(logicHandleExternalLink, 200);
+				debounceLogicHandleExternalLink();
+			};
 			var arrange = function (e) {
 				if (!e[classList].contains(isBindedClass)) {
 					var url = e[getAttribute]("href") || "";
