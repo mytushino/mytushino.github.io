@@ -2308,13 +2308,13 @@ unescape, verge, VK, WheelIndicator, Ya*/
 								handleDataSrcImageAll(updateMinigridThrottled);
 								manageDataQrcodeImageAll(updateMinigridThrottled);
 							}).then(function () {
-								manageDisqusEmbed();
-							}).then(function () {
 								manageInstagramEmbeds();
 							}).then(function () {
 								manageTwitterEmbeds();
 							}).then(function () {
 								manageVkEmbeds();
+							}).then(function () {
+								manageDisqusEmbed();
 							}).catch (function (err) {
 								console.log("fail: manageMinigrid", err);
 							});
