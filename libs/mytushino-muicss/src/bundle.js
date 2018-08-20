@@ -467,12 +467,6 @@ unescape, verge, VK, WheelIndicator, Ya*/
 		var _removeEventListener = "removeEventListener";
 		var isActiveClass = "is-active";
 		var isBindedClass = "is-binded";
-		var isFixedClass = "is-fixed";
-		var isHiddenClass = "is-hidden";
-		var isBindedIframeLightboxLinkClass = "is-binded-iframe-lightbox-link";
-		var isBindedMinigridCardClass = "is-binded-minigrid-card";
-		var isCollapsableClass = "is-collapsable";
-		var isActiveDisqusThreadClass = "is-active-disqus-thread";
 
 		/* progressBar.increase(20); */
 
@@ -958,7 +952,8 @@ unescape, verge, VK, WheelIndicator, Ya*/
 				debounceLogicHandleExternalLink();
 			};
 			var arrange = function (e) {
-				if (!e[classList].contains(isBindedClass)) {
+				var isBindedExternalLinkClass = "is-binded-external-link";
+				if (!e[classList].contains(isBindedExternalLinkClass)) {
 					var url = e[getAttribute]("href") || "";
 					if (url && parseLink(url).isCrossDomain && parseLink(url).hasHTTP) {
 						e.title = "" + (parseLink(url).hostname || "") + " откроется в новой вкладке";
@@ -968,7 +963,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 						} else {
 							e[_addEventListener]("click", handleExternalLink.bind(null, url));
 						}
-						e[classList].add(isBindedClass);
+						e[classList].add(isBindedExternalLinkClass);
 					}
 				}
 			};
@@ -1145,6 +1140,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 			var linkClass = "iframe-lightbox-link";
 			var link = ctx ? ctx[getElementsByClassName](linkClass) || "" : document[getElementsByClassName](linkClass) || "";
 			var arrange = function (e) {
+				var isBindedIframeLightboxLinkClass = "is-binded-iframe-lightbox-link";
 				if (!e[classList].contains(isBindedIframeLightboxLinkClass)) {
 					e.lightbox = new IframeLightbox(e, {
 						onLoaded: function() {
@@ -1194,6 +1190,8 @@ unescape, verge, VK, WheelIndicator, Ya*/
 			docBody[classList].add(hideSidedrawerClass);
 			sidedrawer[classList].remove(activeClass);
 		};
+
+		var isCollapsableClass = "is-collapsable";
 
 		var manageOtherCollapsableAll = function (_self) {
 			var _this = _self || this;
@@ -1382,6 +1380,8 @@ unescape, verge, VK, WheelIndicator, Ya*/
 		};
 
 		var mgrid;
+		
+		var isBindedMinigridCardClass = "is-binded-minigrid-card";
 
 		var updateMinigrid = function (delay, callback) {
 			var cb = function () {
@@ -1463,7 +1463,7 @@ unescape, verge, VK, WheelIndicator, Ya*/
 			};
 			var initScript = function () {
 				var setDisqusCSSClass = function () {
-					disqusThread[classList].add(isActiveDisqusThreadClass);
+					disqusThread[classList].add(isActiveClass);
 				};
 				if (root.DISQUS) {
 					try {
@@ -1847,6 +1847,9 @@ unescape, verge, VK, WheelIndicator, Ya*/
 
 		var appBar = document[getElementsByTagName]("header")[0] || "";
 		var appBarHeight = appBar.offsetHeight || 0;
+
+		var isFixedClass = "is-fixed";
+		var isHiddenClass = "is-hidden";
 
 		var hideAppBar = function () {
 			var logic = function () {
