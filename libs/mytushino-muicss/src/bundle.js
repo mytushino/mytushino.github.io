@@ -1042,7 +1042,6 @@ unescape, VK, WheelIndicator, Ya*/
 					images[i][classList].add(isBindedDataSrcImgClass);
 					images[i].src = images[i][dataset].src || "";
 					images[i][classList].add(isActiveClass);
-					images[i][classList].add(isBindedClass);
 					cb();
 				}
 			}
@@ -1051,14 +1050,14 @@ unescape, VK, WheelIndicator, Ya*/
 			var _scroll = function (a, b) {
 				return root[_addEventListener]("scroll", function () {
 					clearTimeout(b);
-					b = setTimeout(a, 200);
+					b = setTimeout(a, 100);
 				}, {passive: true}),
 				a;
 			};
 			var _resize = function (a, b) {
 				return root[_addEventListener]("resize", function () {
 					clearTimeout(b);
-					b = setTimeout(a, 200);
+					b = setTimeout(a, 100);
 				}, {passive: true}),
 				a;
 			};
@@ -1136,7 +1135,6 @@ unescape, VK, WheelIndicator, Ya*/
 					iframes[i][classList].add(isBindedDataSrcIframeClass);
 					iframes[i].src = iframes[i][dataset].src || "";
 					iframes[i][classList].add(isActiveClass);
-					iframes[i][classList].add(isBindedClass);
 					iframes[i][setAttribute]("frameborder", "no");
 					iframes[i][setAttribute]("style", "border:none;");
 					iframes[i][setAttribute]("webkitallowfullscreen", "true");
@@ -1151,14 +1149,14 @@ unescape, VK, WheelIndicator, Ya*/
 			var _scroll = function (a, b) {
 				return root[_addEventListener]("scroll", function () {
 					clearTimeout(b);
-					b = setTimeout(a, 200);
+					b = setTimeout(a, 100);
 				}, {passive: true}),
 				a;
 			};
 			var _resize = function (a, b) {
 				return root[_addEventListener]("resize", function () {
 					clearTimeout(b);
-					b = setTimeout(a, 200);
+					b = setTimeout(a, 100);
 				}, {passive: true}),
 				a;
 			};
