@@ -1162,6 +1162,11 @@ unescape, VK, WheelIndicator, Ya*/
 			};
 			_scroll(handleDataSrcIframeAll);
 			_resize(handleDataSrcIframeAll);
+			var timer = setTimeout(function () {
+					clearTimeout(timer);
+					timer = null;
+					handleDataSrcIframeAll();
+				}, 100);
 		};
 		manageDataSrcIframeAll();
 
@@ -1700,7 +1705,7 @@ unescape, VK, WheelIndicator, Ya*/
 						target: "dummy",
 						numOfWords: 10,
 						toggle: true,
-						moreLink: "БОЛЬШЕ",
+						moreLink: "[&#8230;]",
 						lessLink: "МЕНЬШЕ",
 						inline: true,
 						customBlockElement: "p"
