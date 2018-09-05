@@ -44,6 +44,10 @@
 			"url": "./includes/mytushino-muicss/home_and_garden.html",
 			"title": "Дом и сад"
 		}, {
+			"href": "#/toys_and_hobbies",
+			"url": "./includes/mytushino-muicss/toys_and_hobbies.html",
+			"title": "Игрушки и хобби"
+		}, {
 			"href": "#/services_other",
 			"url": "./includes/mytushino-muicss/services_other.html",
 			"title": "Другие услуги"
