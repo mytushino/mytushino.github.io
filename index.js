@@ -6,9 +6,9 @@ const BrowserWindow = electron.BrowserWindow; // a browser window module
 const path = require("path");
 // sending bugs to Electron project.
 electron.crashReporter.start({
-	productName : "englishextra",
-	companyName : "englishextra.github.io",
-	submitURL : "https://github.com/englishextra/englishextra.github.io/issues",
+	productName : "mytushino",
+	companyName : "mytushino.github.io",
+	submitURL : "https://github.com/mytushino/mytushino.github.io/issues",
 	autoSubmit : true
 });
 // a global link
@@ -28,7 +28,7 @@ app.on("ready", function () {
 			width : 844,
 			height : 640,
 			icon : "favicon.ico",
-			title : "Английский без регистрации"
+			title : "Услуги в Тушино"
 		});
 	// load index.html
 	/* mainWindow.loadURL("file://" + __dirname + "/index.html"); */

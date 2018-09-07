@@ -1,7 +1,7 @@
 {
 	"name": "mytushino",
 	"productName": "mytushino",
-	"companyName": "englishextra.github.io",
+	"companyName": "mytushino.github.io",
 	"version": "0.1.0",
 	"description": "Business Directory of Severnoye and Yuzhnoye Tushino",
 	"repository": {
@@ -101,12 +101,12 @@
 	"maintainers": {
 		"name": "Serguei Shimansky",
 		"email": "englishextra@mail.ru",
-		"url": "https://github.com/englishextra"
+		"url": "https://github.com/mytushino"
 	},
 	"author": {
 		"name": "Serguei Shimansky",
 		"email": "englishextra@mail.ru",
-		"url": "https://github.com/englishextra"
+		"url": "https://github.com/mytushino"
 	},
 	"license": "(MIT)"
 }

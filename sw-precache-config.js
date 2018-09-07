@@ -8,7 +8,7 @@
  * @see {@link https://github.com/GoogleChrome/ioweb2016/blob/master/gulp_scripts/service-worker.js}
  */
 module.exports = {
-	cacheId: "englishextra",
+	cacheId: "mytushino",
 	directoryIndex: "/",
 	navigateFallback: "./",
 	/* dynamicUrlToDependencies: {
