@@ -709,7 +709,7 @@ unescape, VK, WheelIndicator, Ya*/
 		};
 
 		var LoadingSpinner = (function () {
-			var spinner = document[getElementsByClassName]("half-circle-spinner")[0] || "";
+			var spinner = document[getElementsByClassName]("half-circle-spinner")[0] || document[getElementsByClassName]("hollow-dots-spinner")[0] || "";
 			if (!spinner) {
 				spinner = document[createElement]('div');
 				var spinnerInner = document[createElement]("div");
