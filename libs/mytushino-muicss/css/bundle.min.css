@@ -548,7 +548,7 @@ button {
 .mui-dropdown__menu > li > a:hover,
 .mui-dropdown__menu > li > a:active {
 	text-decoration: none;
-	background-color: #83E8DF;
+	background-color: #40D7CF;
 }
 
 /*!
@@ -573,7 +573,7 @@ button {
 }
 
 .mui-btn.mui-btn--primary {
-	background-color: #56D3C7;
+	background-color: #00CFC4;
 }
 
 .mui-btn.mui-btn--danger {
@@ -671,7 +671,7 @@ button {
 	display: block;
 	width: 100%;
 	height: 10.000rem;
-	color: #56D3C7;
+	color: #00CFC4;
 	background-color: #eeeeee;
 	border-radius: 0.125rem;
 	cursor: pointer;
@@ -1927,7 +1927,7 @@ img.office-qrcode-img {
 #sidedrawer li > strong:hover,
 #sidedrawer li > strong:active {
 	text-decoration: none;
-	background-color: #83E8DF;
+	background-color: #40D7CF;
 }
 
 #sidedrawer li strong + ul > li a {
@@ -2025,7 +2025,7 @@ img.office-qrcode-img {
 .mui-appbar .mui-dropdown__menu > li > a:hover,
 .mui-appbar .mui-dropdown__menu > li > a:active {
 	color: $ButtonBackgroundDark;
-	background-color: #83E8DF;
+	background-color: #40D7CF;
 } */
 
 /*!
