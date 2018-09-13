@@ -372,8 +372,8 @@ unescape, VK, WheelIndicator, Ya*/
 				(_this.body || _this.head)[appendChild](script);
 			}
 		};
-		var i,
-			l;
+				var i,
+		l;
 		for (i = 0, l = _this.files[_length]; i < l; i += 1) {
 			if ((/\.js$|\.js\?/).test(_this.files[i])) {
 				_this.js.push(_this.files[i]);
@@ -1500,10 +1500,7 @@ unescape, VK, WheelIndicator, Ya*/
 
 		var isBindedMinigridCardClass = "is-binded-minigrid-card";
 
-		var updateMinigrid = function (delay, callback) {
-			var cb = function () {
-				return callback && "function" === typeof callback && callback();
-			};
+		var updateMinigrid = function (delay) {
 			var timeout = delay || 100;
 			var logThis;
 			logThis = function () {
@@ -1515,7 +1512,6 @@ unescape, VK, WheelIndicator, Ya*/
 						timer = null;
 						/* logThis(); */
 						mgrid.mount();
-						cb();
 					}, timeout);
 			}
 		};
@@ -1633,6 +1629,7 @@ unescape, VK, WheelIndicator, Ya*/
 									instagramMedia[i][parentNode][_addEventListener]("onresize", updateMinigridThrottled, {passive: true});
 								}
 							}
+							i = l = null;
 						}
 					} catch (err) {
 						/* console.log("cannot instgrm.Embeds.process", err); */
@@ -1667,6 +1664,7 @@ unescape, VK, WheelIndicator, Ya*/
 									twitterTweet[i][parentNode][_addEventListener]("onresize", updateMinigridThrottled, {passive: true});
 								}
 							}
+							i = l = null;
 						}
 					} catch (err) {
 						/* console.log("cannot twttr.widgets.load", err); */
@@ -1706,6 +1704,7 @@ unescape, VK, WheelIndicator, Ya*/
 									initVkPost(vkPost[i].id, vkPost[i][dataset].vkOwnerid, vkPost[i][dataset].vkPostid, vkPost[i][dataset].vkHash);
 								}
 							}
+							i = l = null;
 						}
 					} catch (err) {
 						/* console.log("cannot initVkPost", err); */
@@ -1747,6 +1746,7 @@ unescape, VK, WheelIndicator, Ya*/
 					for (i = 0, l = rmLink[_length]; i < l; i += 1) {
 						arrange(rmLink[i]);
 					}
+					i = l = null;
 				}
 			};
 			if (rmLink) {
@@ -1857,7 +1857,7 @@ unescape, VK, WheelIndicator, Ya*/
 						throw new Error("cannot init initMinigrid", err);
 					}
 				};
-				if (cardGrid) {
+				if (root.Minigrid && cardGrid) {
 					initMinigrid();
 				}
 			});
@@ -2347,6 +2347,7 @@ unescape, VK, WheelIndicator, Ya*/
 							break;
 						}
 					}
+					i = l = null;
 				} else {
 					prevHash = jsonObj.hashes[jsonObj.hashes[_length] - 1].href;
 					nextHash = jsonObj.hashes[1].href;
@@ -2431,6 +2432,24 @@ unescape, VK, WheelIndicator, Ya*/
 			});
 		};
 
+		var updateMacy = function (delay) {
+			var timeout = delay || 100;
+			var logThis;
+			logThis = function () {
+				console.log("updateMacy");
+			};
+			if (macy) {
+				var timer = setTimeout(function () {
+						clearTimeout(timer);
+						timer = null;
+						/* logThis(); */
+						macy.recalculate(true, true);
+					}, timeout);
+			}
+		};
+
+		var updateMacyThrottled = throttle(updateMacy, 2000);
+
 		var jhrouter;
 		jhrouter = new JsonHashRouter("./libs/mytushino-muicss/json/navigation.min.json", appContentId, {
 				jsonHomePropName: "home",
@@ -2506,31 +2525,27 @@ unescape, VK, WheelIndicator, Ya*/
 						manageReadMore();
 						manageExpandingLayers();
 						manageMacy().then(function () {
-							handleDataSrcImageAll();
+							handleDataSrcImageAll(updateMacyThrottled);
 						}).then(function () {
 							scroll2Top(0, 20000);
 						}).catch (function (err) {
 							console.log("fail: manageMacy", err);
 						});
-						/* var timer = setTimeout(function () {
-							clearTimeout(timer);
-							timer = null; */
-							manageMinigrid().then(function () {
-								handleDataSrcIframeAll(updateMinigridThrottled);
-								handleDataSrcImageAll(updateMinigridThrottled);
-								manageDataQrcodeImageAll(updateMinigridThrottled);
-							}).then(function () {
-								manageInstagramEmbeds();
-							}).then(function () {
-								manageTwitterEmbeds();
-							}).then(function () {
-								manageVkEmbeds();
-							}).then(function () {
-								manageDisqusEmbed();
-							}).catch (function (err) {
-								console.log("fail: manageMinigrid", err);
-							});
-						/* }, 100); */
+						manageMinigrid().then(function () {
+							handleDataSrcIframeAll(updateMinigridThrottled);
+							handleDataSrcImageAll(updateMinigridThrottled);
+							manageDataQrcodeImageAll(updateMinigridThrottled);
+						}).then(function () {
+							manageInstagramEmbeds();
+						}).then(function () {
+							manageTwitterEmbeds();
+						}).then(function () {
+							manageVkEmbeds();
+						}).then(function () {
+							manageDisqusEmbed();
+						}).catch (function (err) {
+							console.log("fail: manageMinigrid", err);
+						});
 					}
 					LoadingSpinner.hide();
 					scroll2Top(0, 20000);
