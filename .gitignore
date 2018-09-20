@@ -1,7 +1,3 @@
-bower_components/
-node_modules/
-maps/
-/libs/mytushino-muicss/img/mytushino-gallery
 *.ai
 *.fw.png
 *.map
@@ -9,3 +5,7 @@ maps/
 *.URL
 *.zip
 .src
+/libs/mytushino-muicss/img/mytushino-gallery
+bower_components/
+maps/
+node_modules/
