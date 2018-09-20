@@ -2490,8 +2490,7 @@ QRCode, require, ripple, t, twttr, unescape, VK, WheelIndicator, Ya*/
 						if (imgCounter === imgLength) {
 							macyEvent.emitEvent("imagesloaded");
 							scroll2Top(1, 20000);
-							console.log("manageMacy: " + imgCounter + " images loaded");
-							resolve();
+							resolve("manageMacy: " + imgCounter + " images loaded");
 						}
 					};
 					onError = function () {

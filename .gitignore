@@ -1,9 +1,11 @@
 bower_components/
 node_modules/
 maps/
-*.map
-*.fw.png
-*.URL
-*.ai
-*.psd
 /libs/mytushino-muicss/img/mytushino-gallery
+*.ai
+*.fw.png
+*.map
+*.psd
+*.URL
+*.zip
+.src
