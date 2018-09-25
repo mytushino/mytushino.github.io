@@ -5,7 +5,6 @@
 *.URL
 *.zip
 .src
-/libs/mytushino-muicss/img/mytushino-gallery
 bower_components/
 maps/
 node_modules/
