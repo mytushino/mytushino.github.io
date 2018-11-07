@@ -53,8 +53,10 @@ gulp.task("browser-sync", ["bundle-assets"], function () {
 	//gulp.watch("../../cdn/highlight.js/9.12.0/scss/**/*.scss", ["compile-highlightjs-scss"]);
 	gulp.watch("../../**/*.html").on("change", reload);
 	gulp.watch("../../libs/mytushino-muicss/js/*.js").on("change", reload);
+	gulp.watch("../../libs/mytushino-muicss/js/include-script/*.js").on("change", reload);
 	gulp.watch("../../libs/mytushino-muicss/json/*.json").on("change", reload);
 	gulp.watch("../../libs/mytushino-muicss/css/*.css").on("change", reload);
+	gulp.watch("../../libs/mytushino-muicss/css/include-style/*.css").on("change", reload);
 });
 
 gulp.task("compile-muicss-scss", function () {
