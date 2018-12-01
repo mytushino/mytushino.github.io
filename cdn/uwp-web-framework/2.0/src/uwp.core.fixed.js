@@ -46,7 +46,7 @@
 	/*!
 	 * @see {@link http://www.javascriptkit.com/javatutors/loadjavascriptcss2.shtml}
 	 */
-	var removejscssfile = function removejscssfile(filename, filetype) {
+	var removeJsCssFile = function (filename, filetype) {
 		var targetelement = filetype == "js" ? "script" : filetype == "css" ? "link" : "none";
 		var targetattr = filetype == "js" ? "src" : filetype == "css" ? "href" : "none";
 		var allsuspects = document.getElementsByTagName(targetelement) || "";
@@ -88,16 +88,17 @@
 
 		/* Default config */
 		config: {
-			pageTitle: "UWP web framework",
-			layoutType: "docked-minimized",
-			activeColor: "#26c6da",
-			mainColor: "#373737",
-			mainColorDarkened: "#0097a7",
-			includes: "./includes/serguei-uwp",
-			includeScript: "./libs/serguei-uwp/js/include-script",
-			includeStyle: "./libs/serguei-uwp/css/include-style",
-			navContainer: "nav-container",
-			home: "home"
+				pageTitle: "UWP web framework",
+				layoutType: "docked-minimized",
+				activeColor: "#26C6DA",
+				mainColor: "#373737",
+				mainColorDarkened: "#0097A7",
+				includes: "./includes/serguei-uwp",
+				includeScript: "./libs/serguei-uwp/js/include-script",
+				includeStyle: "./libs/serguei-uwp/css/include-style",
+				navContainer: "nav-container",
+				home: "home",
+				hashNavKey: "page"
 		},
 
 		/* Main init function */
@@ -107,11 +108,26 @@
 
 			UWP.head = document.head;
 			UWP.body = document.body;
-			UWP.pageTitle = document.createElement("h1");
+
+			/* UWP.pageTitle = document.createElement("h1"); */
+			var pageTitle = document.createElement("div");
+			pageTitle.setAttribute("class", "uwp-title");
+			pageTitle.style.display = "none";
+			UWP.pageTitle = pageTitle;
+
 			document.body.appendChild(UWP.pageTitle);
-			UWP.header = document.createElement("header");
+
+			var header = document.createElement("div");
+			header.setAttribute("class", "uwp-header");
+			/* UWP.header = document.getElementsByClassName("uwp-header")[0] || ""; */
+			UWP.header = header;
 			document.body.appendChild(UWP.header);
-			UWP.main = document.createElement("main");
+
+			var main = document.createElement("div");
+			main.setAttribute("class", "uwp-main");
+			main.setAttribute("role", "main");
+			/* UWP.main = document.getElementsByClassName("uwp-main")[0] || ""; */
+			UWP.main = main;
 			document.body.appendChild(UWP.main);
 			/* Gets user-set config */
 
@@ -122,11 +138,12 @@
 			/* Define additional variables */
 
 			UWP.header.type = UWP.config.layoutType;
-			UWP.body.setAttribute("data-layoutType", UWP.header.type);
+			UWP.body.setAttribute("data-layout-type", UWP.header.type);
 			/* Handles clicking internal links */
 
 			UWP.body.addEventListener("click", function (event) {
 				if (event.target.getAttribute("data-target") !== null) {
+					event.stopPropagation();
 					event.preventDefault();
 					UWP.navigate(event.target.getAttribute("data-target"));
 				}
@@ -139,10 +156,12 @@
 			UWP.createStyles();
 			/* Handles navigation between pages */
 
-			UWP.navigate(root.location.hash.split("=")[1], false);
+			/* UWP.navigate(root.location.hash.split("=")[1], false); */
+			UWP.navigate(root.location.hash.split(/#\//)[1], false);
 
 			root.onhashchange = function () {
-				UWP.navigate(root.location.hash.split("=")[1], false);
+				/* UWP.navigate(root.location.hash.split("=")[1], false); */
+				UWP.navigate(root.location.hash.split(/#\//)[1], false);
 			};
 			/* Prepares space for document's title, puts it in place */
 
@@ -198,16 +217,20 @@
 				}
 
 				navLink.addEventListener("click", function (event) {
+					event.stopPropagation();
 					event.preventDefault();
-					UWP.menuList.classList.remove("active");
-					UWP.navigate(navTarget);
+					/* if (root.location.hash !== "".concat("#", UWP.config.hashNavKey, "=", navTarget)) { */
+					if (root.location.hash !== "".concat("#/", navTarget)) {
+						UWP.menuList.classList.remove("active");
+						UWP.navigate(navTarget);
+					}
 				});
 				navLink.setAttribute("data-target", navTarget);
 				navElement.appendChild(navLink);
 				return navElement;
 			}
 
-			var URL = "".concat(UWP.config.includes, "/").concat(target, ".html");
+			var URL = "".concat(UWP.config.includes, "/", target, ".html");
 
 			var UWP_navigation_request = root.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
 
@@ -217,7 +240,7 @@
 
 			UWP_navigation_request.onreadystatechange = function () {
 
-				if (UWP_navigation_request.status === "404" || UWP_navigation_request.status === "0") {
+				if (UWP_navigation_request.status === 404 || UWP_navigation_request.status === 0) {
 					console.log("Error XMLHttpRequest-ing file", UWP_navigation_request.status);
 				} else if (UWP_navigation_request.readyState === 4 && UWP_navigation_request.status === 200 && UWP_navigation_request.responseText) {
 
@@ -227,7 +250,10 @@
 
 					var elMainMenu = parsed.getElementsByTagName("nav-container")[0] || "";
 					var navsSource = elMainMenu || "";
-					UWP.nav = document.createElement("nav");
+					/* UWP.nav = document.createElement("nav"); */
+					var nav = document.createElement("div");
+					nav.setAttribute("class", "uwp-nav");
+					UWP.nav = nav;
 					/* Adds all the navigations to the DOM tree */
 
 					var elList = navsSource ? navsSource.getElementsByTagName("nav-list") || "" : "";
@@ -254,7 +280,9 @@
 		/* Highlights current page in navigation */
 		updateNavigation: function updateNavigation() {
 			console.log("UWP.updateNavigation()");
-			var nav = document.getElementsByTagName("nav")[0] || "";
+			/* var nav = document.getElementsByTagName("nav")[0] || ""; */
+			var nav = document.getElementsByClassName("uwp-nav")[0] || "";
+
 			var navA = nav ? nav.getElementsByTagName("a") || "" : "";
 			toArray(navA).forEach(function (link) {
 				if (link.getAttribute("data-target") === UWP.config.currentPage) {
@@ -295,7 +323,7 @@
 				}
 				/* var Darkened_RGB = parseColor(UWP.config.Darkened); */
 
-				UWP.customStyle.innerHTML += "\n\t\t\t\t[data-layoutType=\"tabs\"] header {\n\t\t\t\t\tbackground: ".concat(UWP.config.mainColor, ";\n\t\t\t\t}\n\n\t\t\t\t[data-layoutType=\"overlay\"] header {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layoutType=\"overlay\"] header nav:nth-of-type(1) {\n\t\t\t\t\tbackground-color: ").concat(UWP.config.mainColorDarkened, "; // @TODO: Darkened?\n\t\t\t\t}\n\n\t\t\t\t[data-layoutType=\"docked-minimized\"] header {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layoutType=\"docked-minimized\"] header nav:nth-of-type(1) {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColorDarkened, "; // @TODO: Darkened?\n\t\t\t\t}\n\n\t\t\t\t[data-layoutType=\"docked\"] header {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layoutType=\"docked\"] header nav:nth-of-type(1) {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColorDarkened, "; // @TODO: Darkened?\n\t\t\t\t}\n\t\t\t");
+				UWP.customStyle.innerHTML += "\n\t\t\t\t[data-layout-type=\"tabs\"] .uwp-header {\n\t\t\t\t\tbackground: ".concat(UWP.config.mainColor, ";\n\t\t\t\t}\n\n\t\t\t\t[data-layout-type=\"overlay\"] .uwp-header {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layout-type=\"overlay\"] .uwp-header .uwp-nav:nth-of-type(1) {\n\t\t\t\t\tbackground-color: ").concat(UWP.config.mainColorDarkened, ";\n\t\t\t\t}\n\n\t\t\t\t[data-layout-type=\"docked-minimized\"] .uwp-header {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layout-type=\"docked-minimized\"] .uwp-header .uwp-nav:nth-of-type(1) {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColorDarkened, ";\n\t\t\t\t}\n\n\t\t\t\t[data-layout-type=\"docked\"] .uwp-header {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layout-type=\"docked\"] .uwp-header .uwp-nav:nth-of-type(1) {\n\t\t\t\t\tbackground: ").concat(UWP.config.mainColorDarkened, ";\n\t\t\t\t}\n\t\t\t");
 			}
 
 			if (UWP.config.activeColor) {
@@ -311,18 +339,22 @@
 					}
 				}
 
-				UWP.customStyle.innerHTML += "\n\t\t\t\t[data-layoutType=\"tabs\"] header nav:nth-of-type(1) ul li.active {\n\t\t\t\t\tcolor: ".concat(UWP.config.activeColor, ";\n\t\t\t\t\tborder-bottom-color: ").concat(UWP.config.activeColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layoutType=\"overlay\"] header nav:nth-of-type(1) ul li.active {\n\t\t\t\t\tbackground-color: ").concat(UWP.config.activeColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layoutType=\"docked-minimized\"] header nav:nth-of-type(1) ul li.active {\n\t\t\t\t\tbackground-color: ").concat(UWP.config.activeColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layoutType=\"docked\"] header nav:nth-of-type(1) ul li.active {\n\t\t\t\t\tbackground-color: ").concat(UWP.config.activeColor, ";\n\t\t\t\t}\n\t\t\t");
+				UWP.customStyle.innerHTML += "\n\t\t\t\t[data-layout-type=\"tabs\"] .uwp-header .uwp-nav:nth-of-type(1) ul li.active {\n\t\t\t\t\tcolor: ".concat(UWP.config.activeColor, ";\n\t\t\t\t\tborder-bottom-color: ").concat(UWP.config.activeColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layout-type=\"overlay\"] .uwp-header .uwp-nav:nth-of-type(1) ul li.active {\n\t\t\t\t\tbackground-color: ").concat(UWP.config.activeColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layout-type=\"docked-minimized\"] .uwp-header .uwp-nav:nth-of-type(1) ul li.active {\n\t\t\t\t\tbackground-color: ").concat(UWP.config.activeColor, ";\n\t\t\t\t}\n\t\t\t\t[data-layout-type=\"docked\"] .uwp-header .uwp-nav:nth-of-type(1) ul li.active {\n\t\t\t\t\tbackground-color: ").concat(UWP.config.activeColor, ";\n\t\t\t\t}\n\t\t\t");
 			}
 
 			if (UWP.customStyle.innerHTML.length) {
 				UWP.body.appendChild(UWP.customStyle);
+				/* UWP.body.insertBefore(UWP.customStyle, UWP.body.firstChild); */
 			}
 		},
 
 		/* Puts a menu button in title bar */
 		addMenuButton: function addMenuButton() {
 			console.log("UWP.addMenuButton()");
-			UWP.menuButton = document.createElement("button");
+			/* UWP.menuButton = document.createElement("button"); */
+			var menuButton = document.createElement("button");
+			menuButton.setAttribute("class", "uwp-menu-button");
+			UWP.menuButton = menuButton;
 			/* UWP.menuButton.innerHTML = "&#xE700;"; */
 
 			/* var GlobalNavButton = document.createElement("img");
@@ -332,7 +364,8 @@
 			UWP.menuButton.innerHTML = '<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" transform="scale(1.75 1.75) translate(0 0)" d="M1024 320h-1024v-64h1024v64zm0 512h-1024v-64h1024v64zm0-256.5h-1024v-63.5h1024v63.5z"/></svg>';
 			UWP.menuButton.setAttribute("aria-label", "Menu");
 
-			var headerNav = UWP.header.getElementsByTagName("nav")[0] || "";
+			/* var headerNav = UWP.header.getElementsByTagName("nav")[0] || ""; */
+			var headerNav = UWP.header.getElementsByClassName("uwp-nav")[0] || "";
 
 			UWP.menuList = headerNav || "";
 			UWP.menuButton.addEventListener("click", function () {
@@ -356,7 +389,8 @@
 			/* Pushes history state */
 
 			if (addHistory !== false) {
-				history.pushState("", "", "".concat(root.location.href.split("#")[0], "#page=").concat(target));
+				/* history.pushState("", "", "".concat(root.location.href.split("#")[0], "#", UWP.config.hashNavKey, "=", target)); */
+				history.pushState("", "", "".concat(root.location.href.split(/#\//)[0], "#/", target));
 			}
 			/* Clears the page content */
 
@@ -366,11 +400,12 @@
 
 			function displayError(title) {
 				UWP.main.classList.add("error");
-				UWP.main.innerHTML = "\n\t\t\t\t<div class=\"error-container\">\n\t\t\t\t\t<h3>".concat(title, "</h3>\n\t\t\t\t\t<p>Ready for an adventure?</p>\n\t\t\t\t\t<p><a href=\"#\">Try again</a>\n\t\t\t\t</div>\n\t\t\t");
+				UWP.main.innerHTML = "\n\t\t\t\t<div class=\"error-container\">\n\t\t\t\t\t<p>".concat(title, "</p>\n\t\t\t\t\t<p><a href=\"javascript:void(0);\">Go Home</a></p>\n\t\t\t\t</div>\n\t\t\t");
 				var mainA = UWP.main.getElementsByTagName("a")[0] || "";
 				mainA.addEventListener("click", function (event) {
+					event.stopPropagation();
 					event.preventDefault();
-					UWP.navigate(target);
+					UWP.navigate(UWP.config.home);
 				});
 				UWP.updateNavigation();
 			}
@@ -386,8 +421,10 @@
 
 			UWP_navigate_request.onreadystatechange = function () {
 
-				if (UWP_navigate_request.status === "404" || UWP_navigate_request.status === "0") {
+				if (UWP_navigate_request.status === 404 || UWP_navigate_request.status === 0) {
 					console.log("Error XMLHttpRequest-ing file", UWP_navigate_request.status);
+					console.error("Something went wrong");
+					displayError("Something went wrong");
 				} else if (UWP_navigate_request.readyState === 4 && UWP_navigate_request.status === 200 && UWP_navigate_request.responseText) {
 
 					/* var parser = new DOMParser();
@@ -433,7 +470,7 @@
 
 						var _src = "".concat(UWP.config.includeScript, "/").concat(scriptName);
 
-						removejscssfile(_src, "js");
+						removeJsCssFile(_src, "js");
 
 						var script = document.createElement("script");
 						script.setAttribute("src", _src);
@@ -448,7 +485,7 @@
 
 						var _href = "".concat(UWP.config.includeStyle, "/").concat(styleName);
 
-						removejscssfile(_href, "css");
+						removeJsCssFile(_href, "css");
 
 						var link = document.createElement("link");
 						link.setAttribute("href", _href);
