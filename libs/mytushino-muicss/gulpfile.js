@@ -38,6 +38,9 @@ highlightjs = {
 	css: "../../cdn/highlight.js/9.12.0/css"
 };
 
+/*!
+ * @see {@link https://browsersync.io/docs/gulp}
+ */
 gulp.task("browser-sync", ["bundle-assets"], function () {
 	browserSync.init({
 		server: "../../"
