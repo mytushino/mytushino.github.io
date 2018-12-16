@@ -17,9 +17,9 @@ function _typeof(obj) {
 }
 
 /*global $readMoreJS, ActiveXObject, console, DISQUS, doesFontExist,
-EventEmitter, hljs, IframeLightbox, imgLightbox, instgrm,
-JsonHashRouter, loadJsCss, Macy, Minigrid, Mustache, Promise,
-QRCode, require, ripple, t, twttr, unescape, VK, WheelIndicator, Ya*/
+EventEmitter, hljs, IframeLightbox, imgLightbox, instgrm, JsonHashRouter,
+loadJsCss, Macy, Minigrid, Mustache, Promise, QRCode, require, ripple, t,
+twttr, unescape, VK, WheelIndicator, Ya*/
 
 /*property console, join, split */
 
