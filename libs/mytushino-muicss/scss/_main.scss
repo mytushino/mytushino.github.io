@@ -1716,9 +1716,8 @@ img.office-qrcode-img {
  * hide default css preloader
  */
 
-.iframe-lightbox .content > .body,
-.svganimate .iframe-lightbox .content > .body {
-	background-image: none;
+.iframe-lightbox .content > .body .half-circle-spinner {
+	display: none;
 }
 
 .iframe-lightbox iframe {

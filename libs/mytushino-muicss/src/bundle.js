@@ -2249,7 +2249,7 @@ QRCode, require, ripple, t, twttr, unescape, VK, WheelIndicator, Ya*/
 				"../../fonts/roboto-fontfacekit/2.137/css/roboto.css",
 				"../../fonts/roboto-mono-fontfacekit/2.0.986/css/roboto-mono.css",
 				"../../cdn/mui/0.9.39/css/mui.css",
-				"../../cdn/iframe-lightbox/0.1.9/css/iframe-lightbox.fixed.css",
+				"../../cdn/iframe-lightbox/0.2.2/css/iframe-lightbox.fixed.css",
 				"../../cdn/img-lightbox/0.1.2/css/img-lightbox.fixed.css"
 	]; */
 
