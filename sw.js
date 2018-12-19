@@ -5,7 +5,7 @@
  * @see {@link https://github.com/pwa-builder/serviceworkers/pull/28}
  */
 //This is the "Offline copy of pages" service worker
-var cacheName = "mytushino-muicss-offline-v1544990292"; //Install stage sets up the index page (home page) in the cache and opens a new cache
+var cacheName = "mytushino-muicss-offline-v1545253057"; //Install stage sets up the index page (home page) in the cache and opens a new cache
 
 self.addEventListener("install", function(event) {
 	var indexPage = new Request("index.html");
