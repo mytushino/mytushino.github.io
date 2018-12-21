@@ -680,8 +680,10 @@
 		this.href = elem[getAttribute]("href") || "";
 		this.dataPaddingBottom = elem[dataset].paddingBottom || "";
 		this.dataScrolling = elem[dataset].scrolling || "";
+		this.dataTouch = elem[dataset].touch || "";
 		this.rate = options.rate || 500;
 		this.scrolling = options.scrolling;
+		this.touch = options.touch;
 		this.onOpened = options.onOpened;
 		this.onIframeLoaded = options.onIframeLoaded;
 		this.onLoaded = options.onLoaded;
@@ -738,7 +740,7 @@
 
 			this.trigger[_addEventListener]("click", handleIframeLightboxLink);
 
-			if (isTouch) {
+			if (isTouch && (_this.touch || _this.dataTouch)) {
 				this.trigger[_addEventListener](
 					"touchstart",
 					handleIframeLightboxLink
@@ -777,22 +779,20 @@
 		backdrop[_addEventListener]("click", function() {
 			_this.close();
 		});
-
-		if (isTouch) {
-			backdrop[_addEventListener]("touchstart", function() {
-				_this.close();
-			});
-		}
+		/* if (isTouch) {
+      	backdrop[_addEventListener]("touchstart", function () {
+      		_this.close();
+      	});
+      } */
 
 		this.btnClose[_addEventListener]("click", function() {
 			_this.close();
 		});
-
-		if (isTouch) {
-			this.btnClose[_addEventListener]("touchstart", function() {
-				_this.close();
-			});
-		}
+		/* if (isTouch) {
+      	this.btnClose[_addEventListener]("touchstart", function () {
+      		_this.close();
+      	});
+      } */
 
 		root[_addEventListener]("keyup", function(ev) {
 			if (27 === (ev.which || ev.keyCode)) {
@@ -1035,6 +1035,7 @@
 
 		var options = settings || {};
 		var rate = options.rate || 500;
+		var touch = options.touch;
 		var onError = options.onError;
 		var onLoaded = options.onLoaded;
 		var onCreated = options.onCreated;
@@ -1063,22 +1064,14 @@
 		};
 
 		container[_addEventListener]("click", handleImgLightboxContainer);
-
-		if (isTouch) {
-			container[_addEventListener](
-				"touchstart",
-				handleImgLightboxContainer
-			);
-		}
+		/* if (isTouch) {
+      	container[_addEventListener]("touchstart", handleImgLightboxContainer);
+      } */
 
 		btnClose[_addEventListener]("click", handleImgLightboxContainer);
-
-		if (isTouch) {
-			btnClose[_addEventListener](
-				"touchstart",
-				handleImgLightboxContainer
-			);
-		}
+		/* if (isTouch) {
+      	btnClose[_addEventListener]("touchstart", handleImgLightboxContainer);
+      } */
 
 		root[_addEventListener]("keyup", function(ev) {
 			if (27 === (ev.which || ev.keyCode)) {
@@ -1089,6 +1082,7 @@
 		var arrange = function arrange(e) {
 			var hrefString =
 				e[getAttribute]("href") || e[getAttribute]("data-src") || "";
+			var dataTouch = e[getAttribute]("data-touch") || "";
 
 			if (!hrefString) {
 				return;
@@ -1136,7 +1130,7 @@
 
 				e[_addEventListener]("click", handleImgLightboxLink);
 
-				if (isTouch) {
+				if (isTouch && (touch || dataTouch)) {
 					e[_addEventListener]("touchstart", handleImgLightboxLink);
 				}
 			}
@@ -2391,6 +2385,285 @@
 		return defaults;
 	};
 })(document, "undefined" !== typeof window ? window : this);
+
+function _typeof(obj) {
+	if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+		_typeof = function _typeof(obj) {
+			return typeof obj;
+		};
+	} else {
+		_typeof = function _typeof(obj) {
+			return obj &&
+				typeof Symbol === "function" &&
+				obj.constructor === Symbol &&
+				obj !== Symbol.prototype
+				? "symbol"
+				: typeof obj;
+		};
+	}
+	return _typeof(obj);
+}
+
+/*!
+ * modified Generates event when user makes new movement (like a swipe on a touchscreen).
+ * @version 1.1.4
+ * @link https://github.com/Promo/wheel-indicator
+ * @license MIT
+ * @see {@link https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md#feature-detection}
+ * forced passive event listener if supported
+ * passes jshint
+ */
+
+/* global module, window, document */
+var WheelIndicator = (function(root, document) {
+	var eventWheel = "onwheel" in document ? "wheel" : "mousewheel",
+		DEFAULTS = {
+			callback: function callback() {},
+			elem: document,
+			preventMouse: true
+		};
+
+	function Module(options) {
+		this._options = extend(DEFAULTS, options);
+		this._deltaArray = [0, 0, 0];
+		this._isAcceleration = false;
+		this._isStopped = true;
+		this._direction = "";
+		this._timer = "";
+		this._isWorking = true;
+		var self = this;
+
+		this._wheelHandler = function(event) {
+			if (self._isWorking) {
+				processDelta.call(self, event);
+
+				if (self._options.preventMouse) {
+					preventDefault(event);
+				}
+			}
+		};
+
+		addEvent(this._options.elem, eventWheel, this._wheelHandler);
+	}
+
+	Module.prototype = {
+		constructor: Module,
+		turnOn: function turnOn() {
+			this._isWorking = true;
+			return this;
+		},
+		turnOff: function turnOff() {
+			this._isWorking = false;
+			return this;
+		},
+		setOptions: function setOptions(options) {
+			this._options = extend(this._options, options);
+			return this;
+		},
+		getOption: function getOption(option) {
+			var neededOption = this._options[option];
+
+			if (neededOption !== undefined) {
+				return neededOption;
+			}
+
+			throw new Error("Unknown option");
+		},
+		destroy: function destroy() {
+			removeEvent(this._options.elem, eventWheel, this._wheelHandler);
+			return this;
+		}
+	};
+
+	function triggerEvent(event) {
+		event.direction = this._direction;
+
+		this._options.callback.call(this, event);
+	}
+
+	var _getDeltaY = function getDeltaY(event) {
+		if (event.wheelDelta && !event.deltaY) {
+			_getDeltaY = function getDeltaY(event) {
+				return event.wheelDelta * -1;
+			};
+		} else {
+			_getDeltaY = function getDeltaY(event) {
+				return event.deltaY;
+			};
+		}
+
+		return _getDeltaY(event);
+	};
+
+	function preventDefault(event) {
+		event = event || root.event;
+
+		if (event.preventDefault) {
+			event.preventDefault();
+		} else {
+			event.returnValue = false;
+		}
+	}
+
+	function processDelta(event) {
+		var self = this,
+			delta = _getDeltaY(event);
+
+		if (delta === 0) return;
+		var direction = delta > 0 ? "down" : "up",
+			arrayLength = self._deltaArray.length,
+			changedDirection = false,
+			repeatDirection = 0,
+			sustainableDirection,
+			i;
+		clearTimeout(self._timer);
+		self._timer = setTimeout(function() {
+			self._deltaArray = [0, 0, 0];
+			self._isStopped = true;
+			self._direction = direction;
+		}, 150);
+
+		for (i = 0; i < arrayLength; i++) {
+			if (self._deltaArray[i] !== 0) {
+				if (self._deltaArray[i] > 0) {
+					++repeatDirection;
+				} else {
+					--repeatDirection;
+				}
+			}
+		}
+
+		if (Math.abs(repeatDirection) === arrayLength) {
+			sustainableDirection = repeatDirection > 0 ? "down" : "up";
+
+			if (sustainableDirection !== self._direction) {
+				changedDirection = true;
+				self._direction = direction;
+			}
+		}
+
+		if (!self._isStopped) {
+			if (changedDirection) {
+				self._isAcceleration = true;
+				triggerEvent.call(this, event);
+			} else {
+				if (Math.abs(repeatDirection) === arrayLength) {
+					analyzeArray.call(this, event);
+				}
+			}
+		}
+
+		if (self._isStopped) {
+			self._isStopped = false;
+			self._isAcceleration = true;
+			self._direction = direction;
+			triggerEvent.call(this, event);
+		}
+
+		self._deltaArray.shift();
+
+		self._deltaArray.push(delta);
+	}
+
+	function analyzeArray(event) {
+		var deltaArray0Abs = Math.abs(this._deltaArray[0]),
+			deltaArray1Abs = Math.abs(this._deltaArray[1]),
+			deltaArray2Abs = Math.abs(this._deltaArray[2]),
+			deltaAbs = Math.abs(_getDeltaY(event));
+
+		if (
+			deltaAbs > deltaArray2Abs &&
+			deltaArray2Abs > deltaArray1Abs &&
+			deltaArray1Abs > deltaArray0Abs
+		) {
+			if (!this._isAcceleration) {
+				triggerEvent.call(this, event);
+				this._isAcceleration = true;
+			}
+		}
+
+		if (deltaAbs < deltaArray2Abs && deltaArray2Abs <= deltaArray1Abs) {
+			this._isAcceleration = false;
+		}
+	}
+
+	var supportsPassive = (function() {
+		var support = false;
+
+		try {
+			var opts =
+				Object.defineProperty &&
+				Object.defineProperty({}, "passive", {
+					get: function get() {
+						support = true;
+					}
+				});
+			root.addEventListener("test", function() {}, opts);
+		} catch (err) {}
+
+		return support;
+	})();
+
+	function addEvent(elem, type, handler) {
+		if (elem.addEventListener) {
+			elem.addEventListener(
+				type,
+				handler,
+				supportsPassive
+					? {
+							passive: true
+					  }
+					: false
+			);
+		} else if (elem.attachEvent) {
+			elem.attachEvent("on" + type, handler);
+		}
+	}
+
+	function removeEvent(elem, type, handler) {
+		if (elem.removeEventListener) {
+			elem.removeEventListener(
+				type,
+				handler,
+				supportsPassive
+					? {
+							passive: true
+					  }
+					: false
+			);
+		} else if (elem.detachEvent) {
+			elem.detachEvent("on" + type, handler);
+		}
+	}
+
+	function extend(defaults, options) {
+		var extended = {},
+			prop;
+
+		for (prop in defaults) {
+			if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+				extended[prop] = defaults[prop];
+			}
+		}
+
+		for (prop in options) {
+			if (Object.prototype.hasOwnProperty.call(options, prop)) {
+				extended[prop] = options[prop];
+			}
+		}
+
+		return extended;
+	}
+
+	return Module;
+})("undefined" !== typeof window ? window : this, document);
+
+if (
+	(typeof exports === "undefined" ? "undefined" : _typeof(exports)) ===
+	"object"
+) {
+	module.exports = WheelIndicator;
+}
 
 function _typeof(obj) {
 	if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
