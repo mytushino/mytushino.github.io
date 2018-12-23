@@ -1726,17 +1726,15 @@ img.office-qrcode-img {
 
 /*!
  * img-lightbox
- * reset for animate.css
+ * hide default css preloader
  * daneden.github.io/animate.css/
  */
 
-.img-lightbox-container.animated,
-.img-lightbox-container img.animated {
-	animation-duration: 0.4s;
-	animation-fill-mode: both;
+.img-lightbox .half-circle-spinner {
+	display: none;
 }
 
-.img-lightbox-container img {
+.img-lightbox img {
 	box-shadow: 0.250rem 0.250rem 0.250rem 0 rgba(3, 3, 3, 0.3);
 }
 

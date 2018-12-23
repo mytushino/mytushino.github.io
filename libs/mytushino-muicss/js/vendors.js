@@ -641,6 +641,7 @@
 (function(root, document) {
 	"use strict";
 
+	var docElem = document.documentElement || "";
 	var docBody = document.body || "";
 	var appendChild = "appendChild";
 	var classList = "classList";
@@ -779,20 +780,10 @@
 		backdrop[_addEventListener]("click", function() {
 			_this.close();
 		});
-		/* if (isTouch) {
-      	backdrop[_addEventListener]("touchstart", function () {
-      		_this.close();
-      	});
-      } */
 
 		this.btnClose[_addEventListener]("click", function() {
 			_this.close();
 		});
-		/* if (isTouch) {
-      	this.btnClose[_addEventListener]("touchstart", function () {
-      		_this.close();
-      	});
-      } */
 
 		root[_addEventListener]("keyup", function(ev) {
 			if (27 === (ev.which || ev.keyCode)) {
@@ -874,6 +865,7 @@
 
 		this.el[classList].add(isShowingClass);
 		this.el[classList].add(isOpenedClass);
+		docElem[classList].add(iframeLightboxOpenClass);
 		docBody[classList].add(iframeLightboxOpenClass);
 		this.callCallback(this.onOpened, this);
 	};
@@ -881,6 +873,7 @@
 	IframeLightbox.prototype.close = function() {
 		this.el[classList].remove(isOpenedClass);
 		this.body[classList].remove(isLoadedClass);
+		docElem[classList].remove(iframeLightboxOpenClass);
 		docBody[classList].remove(iframeLightboxOpenClass);
 		this.callCallback(this.onClosed, this);
 	};
@@ -915,6 +908,7 @@
 (function(root, document) {
 	"use strict";
 
+	var docElem = document.documentElement || "";
 	var docBody = document.body || "";
 	var animatedClass = "animated";
 	var appendChild = "appendChild";
@@ -1027,6 +1021,7 @@
 			}, 400);
 		}
 
+		docElem[classList].remove(imgLightboxOpenClass);
 		docBody[classList].remove(imgLightboxOpenClass);
 	};
 
@@ -1064,14 +1059,8 @@
 		};
 
 		container[_addEventListener]("click", handleImgLightboxContainer);
-		/* if (isTouch) {
-      	container[_addEventListener]("touchstart", handleImgLightboxContainer);
-      } */
 
 		btnClose[_addEventListener]("click", handleImgLightboxContainer);
-		/* if (isTouch) {
-      	btnClose[_addEventListener]("touchstart", handleImgLightboxContainer);
-      } */
 
 		root[_addEventListener]("keyup", function(ev) {
 			if (27 === (ev.which || ev.keyCode)) {
@@ -1091,6 +1080,7 @@
 			var handleImgLightboxLink = function handleImgLightboxLink(ev) {
 				ev.stopPropagation();
 				ev.preventDefault();
+				docElem[classList].add(imgLightboxOpenClass);
 				docBody[classList].add(imgLightboxOpenClass);
 				container[classList].remove(isLoadedClass);
 
