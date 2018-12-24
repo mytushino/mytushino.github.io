@@ -1,15 +1,26 @@
 {
 	"name": "mytushino",
 	"productName": "mytushino",
-	"companyName": "mytushino.github.io",
+	"companyName": "mytushino.gitlab.io",
 	"version": "0.1.0",
-	"description": "Business Directory of Severnoye and Yuzhnoye Tushino",
+	"description": "A Portfolio Web App",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mytushino/mytushino.github.io.git"
+		"url": "https://gitlab.com/mytushino/mytushino.gitlab.io.git"
+	},
+	"dependencies": {
+		"npm": "^4.0.5"
+	},
+	"devDependencies": {
+		"gulp": "^4.0.0",
+		"gulp-cli": "^2.0.1",
+		"gulp-eslint": "^5.0.0"
+	},
+	"scripts": {
+		"test": "gulp lint-js"
 	},
 	"email": "englishextra@mail.ru",
-	"url": "https://github.com/mytushino/mytushino.github.io/issues",
+	"url": "https://gitlab.com/mytushino/mytushino.gitlab.io/issues",
 	"maintainers": {
 		"name": "Serguei Shimansky",
 		"email": "englishextra@mail.ru",
