@@ -30,7 +30,7 @@
 			body {
 				font-family: Roboto, sans-serif;
 				color: #212121 !important;/* mui.css has rgba(0, 0, 0, 0.87) body text */
-				background-color: #F5F5F5 !important;/* mui.css has white body background */
+				background-color: #F2F2F2 !important;/* mui.css has white body background */
 				margin: 0;
 			}
 			html,
@@ -49,8 +49,8 @@
 			}
 			template,
 			#sidedrawer li > strong + ul,
-			.card-wrap img,
-			.card-wrap iframe {
+			.minigrid__item img,
+			.minigrid__item iframe {
 				display: none;
 			}
 		</style>
@@ -68,8 +68,8 @@
 					opacity: 1;
 				}
 				#sidedrawer li>strong+ul,
-				.card-wrap img,
-				.card-wrap iframe {
+				.minigrid__item img,
+				.minigrid__item iframe {
 					display: block;
 				}
 			</style>
@@ -127,12 +127,12 @@
 			<div class="page" id="page" role="document">
 				<div class="app-content" id="app-content"><div id="content-wrapper">
 	<div id="appbar-placeholder" class="mui--appbar-height"></div>
-	<div class="card-grid--no-js">
-		<div class="card-wrap card-wrap--heading">
+	<div class="minigrid--no-js">
+		<div class="minigrid__item minigrid__item--heading">
 			<h1 class="mui--text-display1">Страница не&#160;найдена</h1>
 			<p class="mui--text-subhead">Страницы, которую вы&#160;запросили, нет в&#160;базе данных. Ничего страшного.</p>
 		</div>
-		<div class="card-wrap">
+		<div class="minigrid__item">
 			<h2 class="mui--text-title">Кликни или тапни меня</h2>
 			<a href="/" class="mui-btn large-btn-link ripple" aria-label="Навигация" title="Начало">
 				<svg class="large-btn-icon">
@@ -140,7 +140,7 @@
 				</svg>
 			</a>
 		</div>
-		<div class="card-wrap card-wrap--copyright">
+		<div class="minigrid__item minigrid__item--copyright">
 			<h3 class="mui--text-subhead">Правовые положения</h3>
 			<p class="mui--text-caption">Все рекламные предложения не&#160;являются публичной офертой или приглашением к&#160;вступлению в&#160;правоотношения.</p>
 			<h3 class="mui--text-subhead">Принадлежность</h3>

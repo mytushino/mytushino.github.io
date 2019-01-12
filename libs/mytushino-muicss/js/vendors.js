@@ -582,7 +582,7 @@
 				};
 
 				for (i = 0; i < rippleButtons.length; i++) {
-					var isBindedRippleClass = "is-binded-ripple";
+					var isBindedRippleClass = "ripple--is-binded";
 
 					if (
 						!rippleButtons[i].classList.contains(
