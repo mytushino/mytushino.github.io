@@ -637,7 +637,6 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 		var _removeEventListener = "removeEventListener";
 		var isActiveClass = "is-active";
 		var isBindedClass = "is-binded";
-		/* progressBar.increase(20); */
 
 		if (docElem && docElem[classList]) {
 			docElem[classList].remove("no-js");
@@ -818,26 +817,6 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			document[title] = document[title] + userBrowsingDetails;
 		}
 
-		var scriptIsLoaded = function scriptIsLoaded(scriptSrc) {
-			var scriptAll, i, l;
-
-			for (
-				scriptAll = document[getElementsByTagName]("script") || "",
-					i = 0,
-					l = scriptAll[_length];
-				i < l;
-				i += 1
-			) {
-				if (scriptAll[i][getAttribute]("src") === scriptSrc) {
-					scriptAll = i = l = null;
-					return true;
-				}
-			}
-
-			scriptAll = i = l = null;
-			return false;
-		};
-
 		var debounce = function debounce(func, wait) {
 			var timeout;
 			var args;
@@ -939,38 +918,17 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			tick();
 		};
 
-		var appendFragment = function appendFragment(e, a) {
-			var parent = a || document[getElementsByTagName]("body")[0] || "";
-
-			if (e) {
-				var df = document[createDocumentFragment]() || "";
-
-				if ("string" === typeof e) {
-					e = document[createTextNode](e);
-				}
-
-				df[appendChild](e);
-				parent[appendChild](df);
-			}
-		};
-
 		var LoadingSpinner = (function() {
 			var spinner = document[getElementById]("loading-spinner") || "";
 
 			if (!spinner) {
 				spinner = document[createElement]("div");
-				var spinnerInner = document[createElement]("div");
-				spinnerInner[setAttribute]("class", "half-circle-spinner");
-				spinnerInner.id = "loading-spinner";
-				spinnerInner[setAttribute]("aria-hidden", "true");
-				var spinnerCircle1 = document[createElement]("div");
-				spinnerCircle1[setAttribute]("class", "circle circle-1");
-				spinnerInner[appendChild](spinnerCircle1);
-				var spinnerCircle2 = document[createElement]("div");
-				spinnerCircle2[setAttribute]("class", "circle circle-2");
-				spinnerInner[appendChild](spinnerCircle2);
-				spinner[appendChild](spinnerInner);
-				appendFragment(spinner, docBody);
+				spinner[setAttribute]("class", "half-circle-spinner");
+				spinner[setAttribute]("id", "loading-spinner");
+				spinner[setAttribute]("aria-hidden", "true");
+				spinner[innerHTML] =
+					'<div class="circle circle-1"></div><div class="circle circle-2"></div>';
+				docBody[appendChild](spinner);
 			}
 
 			return {
@@ -991,6 +949,21 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				}
 			};
 		})();
+
+		var appendFragment = function appendFragment(e, a) {
+			var parent = a || document[getElementsByTagName]("body")[0] || "";
+
+			if (e) {
+				var df = document[createDocumentFragment]() || "";
+
+				if ("string" === typeof e) {
+					e = document[createTextNode](e);
+				}
+
+				df[appendChild](e);
+				parent[appendChild](df);
+			}
+		};
 
 		var removeChildren = function removeChildren(e) {
 			if (e && e.firstChild) {
@@ -1286,22 +1259,13 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			}
 		};
 
-		var manageExternalLinkAll = function manageExternalLinkAll(scope) {
-			var ctx = scope && scope.nodeName ? scope : "";
-			var linkTag = "a";
-			var link = ctx
-				? ctx[getElementsByTagName](linkTag) || ""
-				: document[getElementsByTagName](linkTag) || "";
+		var manageExternalLinkAll = function manageExternalLinkAll() {
+			var link = document[getElementsByTagName]("a") || "";
 
 			var handleExternalLink = function handleExternalLink(url, ev) {
 				ev.stopPropagation();
 				ev.preventDefault();
-				var logicHandleExternalLink = openDeviceBrowser.bind(null, url);
-				var debounceLogicHandleExternalLink = debounce(
-					logicHandleExternalLink,
-					200
-				);
-				debounceLogicHandleExternalLink();
+				debounce(openDeviceBrowser.bind(null, url), 200);
 			};
 
 			var arrange = function arrange(e) {
@@ -1624,11 +1588,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			};
 
 			if (rmLink) {
-				var timer = setTimeout(function() {
-					clearTimeout(timer);
-					timer = null;
-					initScript();
-				}, 100);
+				initScript();
 			}
 		};
 
@@ -1842,35 +1802,33 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 					manageOtherCollapsableAll(holder);
 
 					var initScript = function initScript() {
-						if (root.Ya) {
-							try {
-								if (yshare) {
-									yshare.updateContent({
+						try {
+							if (yshare) {
+								yshare.updateContent({
+									title: document[title] || "",
+									description: document[title] || "",
+									url: root.location.href || ""
+								});
+							} else {
+								yshare = Ya.share2(yaShare2Id, {
+									content: {
 										title: document[title] || "",
 										description: document[title] || "",
 										url: root.location.href || ""
-									});
-								} else {
-									yshare = Ya.share2(yaShare2Id, {
-										content: {
-											title: document[title] || "",
-											description: document[title] || "",
-											url: root.location.href || ""
-										}
-									});
-								}
-							} catch (err) {
-								throw new Error(
-									"cannot yshare.updateContent or Ya.share2 " +
-										err
-								);
+									}
+								});
 							}
+						} catch (err) {
+							throw new Error(
+								"cannot yshare.updateContent or Ya.share2 " +
+									err
+							);
 						}
 					};
 
 					var jsUrl = forcedHTTP + "://yastatic.net/share2/share.js";
 
-					if (!scriptIsLoaded(jsUrl)) {
+					if (!root.Ya) {
 						var load;
 						load = new loadJsCss([jsUrl], initScript);
 					} else {
@@ -1915,7 +1873,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 					manageOtherCollapsableAll(holder);
 
 					var initScript = function initScript() {
-						if (root.VK && !vlike) {
+						if (!vlike) {
 							try {
 								VK.init({
 									apiId: vkLike[dataset].apiid || "",
@@ -1935,7 +1893,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 					var jsUrl = forcedHTTP + "://vk.com/js/api/openapi.js?154";
 
-					if (!scriptIsLoaded(jsUrl)) {
+					if (!root.VK) {
 						var load;
 						load = new loadJsCss([jsUrl], initScript);
 					} else {
@@ -2130,11 +2088,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			if (menu) {
 				menu[style].top = top + "px";
 
-				if (
-					!menu[classList].contains(
-						"mui-dropdown__menu--right"
-					)
-				) {
+				if (!menu[classList].contains("mui-dropdown__menu--right")) {
 					menu[style].left = left + "px";
 				}
 
@@ -2162,12 +2116,8 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			}
 		};
 
-		var manageDropdownButtonAll = function manageDropdownButtonAll(scope) {
-			var ctx = scope && scope.nodeName ? scope : "";
-			var linkTag = "a";
-			var link = ctx
-				? ctx[getElementsByTagName](linkTag) || ""
-				: document[getElementsByTagName](linkTag) || "";
+		var manageDropdownButtonAll = function manageDropdownButtonAll() {
+			var link = document[getElementsByTagName]("a") || "";
 			var btn = [];
 			var j, m;
 
@@ -2184,12 +2134,9 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 				for (i = 0, l = btn[_length]; i < l; i += 1) {
 					if (
-						!btn[i][classList].contains(
-							isBindedClass
-						) &&
-						btn[
-							i
-						].nextElementSibling.nodeName.toLowerCase() === "ul" &&
+						!btn[i][classList].contains(isBindedClass) &&
+						btn[i].nextElementSibling.nodeName.toLowerCase() ===
+							"ul" &&
 						btn[i].nextElementSibling.nodeType === 1
 					) {
 						btn[i][_addEventListener](
@@ -2241,12 +2188,8 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 		hideDropdownMenuAllOnNavigating();
 
-		var manageHljsCodeAll = function manageHljsCodeAll(scope) {
-			var ctx = scope && scope.nodeName ? scope : "";
-			var codeTag = "code";
-			var code = ctx
-				? ctx[getElementsByTagName](codeTag) || ""
-				: document[getElementsByTagName](codeTag) || "";
+		var manageHljsCodeAll = function manageHljsCodeAll() {
+			var code = document[getElementsByTagName]("code") || "";
 
 			if (root.hljs) {
 				var i, l;
@@ -2273,7 +2216,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 		manageRippleEffect();
 		var appEvents = new EventEmitter();
-		var mgrid;
+		root.minigridInstance = null;
 
 		var updateMinigrid = function updateMinigrid(delay) {
 			var timeout = delay || 100;
@@ -2283,13 +2226,13 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				console.log("updateMinigrid");
 			};
 
-			if (mgrid) {
+			if (root.minigridInstance) {
 				var timer = setTimeout(function() {
 					clearTimeout(timer);
 					timer = null;
 					/* logThis(); */
 
-					mgrid.mount();
+					root.minigridInstance.mount();
 				}, timeout);
 			}
 		};
@@ -2381,42 +2324,40 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 					disqusThread[classList].add(isActiveClass);
 				};
 
-				if (root.DISQUS) {
-					try {
-						DISQUS.reset({
-							reload: true,
-							config: function config() {
-								this.page.identifier = disqusThreadShortname;
-								this.page.url = locationHref;
-							}
-						});
-
-						if (
-							!disqusThread[parentNode][classList].contains(
-								minigridItemIsBindedClass
-							)
-						) {
-							disqusThread[parentNode][classList].add(
-								minigridItemIsBindedClass
-							);
-							triggerOnHeightChange(
-								disqusThread[parentNode],
-								1000,
-								null,
-								setDisqusCSSClass
-							);
-
-							disqusThread[parentNode][_addEventListener](
-								"onresize",
-								updateMinigridThrottled,
-								{
-									passive: true
-								}
-							);
+				try {
+					DISQUS.reset({
+						reload: true,
+						config: function config() {
+							this.page.identifier = disqusThreadShortname;
+							this.page.url = locationHref;
 						}
-					} catch (err) {
-						throw new Error("cannot DISQUS.reset " + err);
+					});
+
+					if (
+						!disqusThread[parentNode][classList].contains(
+							minigridItemIsBindedClass
+						)
+					) {
+						disqusThread[parentNode][classList].add(
+							minigridItemIsBindedClass
+						);
+						triggerOnHeightChange(
+							disqusThread[parentNode],
+							1000,
+							null,
+							setDisqusCSSClass
+						);
+
+						disqusThread[parentNode][_addEventListener](
+							"onresize",
+							updateMinigridThrottled,
+							{
+								passive: true
+							}
+						);
 					}
+				} catch (err) {
+					throw new Error("cannot DISQUS.reset " + err);
 				}
 			};
 
@@ -2428,7 +2369,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 						disqusThreadShortname +
 						".disqus.com/embed.js";
 
-					if (!scriptIsLoaded(jsUrl)) {
+					if (!root.DISQUS) {
 						var load;
 						load = new loadJsCss([jsUrl], initScript);
 					} else {
@@ -2445,60 +2386,57 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				document[getElementsByClassName]("instagram-media")[0] || "";
 
 			var initScript = function initScript() {
-				if (root.instgrm) {
-					try {
-						var instagramMedia =
-							document[getElementsByClassName](
-								"instagram-media"
-							) || "";
+				try {
+					var instagramMedia =
+						document[getElementsByClassName]("instagram-media") ||
+						"";
 
-						if (instagramMedia) {
-							instgrm.Embeds.process();
-							var i, l;
+					if (instagramMedia) {
+						instgrm.Embeds.process();
+						var i, l;
 
-							for (
-								i = 0, l = instagramMedia[_length];
-								i < l;
-								i += 1
+						for (
+							i = 0, l = instagramMedia[_length];
+							i < l;
+							i += 1
+						) {
+							if (
+								!instagramMedia[i][parentNode][
+									classList
+								].contains(minigridItemIsBindedClass)
 							) {
-								if (
-									!instagramMedia[i][parentNode][
-										classList
-									].contains(minigridItemIsBindedClass)
-								) {
-									instagramMedia[i][parentNode][
-										classList
-									].add(minigridItemIsBindedClass);
-									triggerOnHeightChange(
-										instagramMedia[i][parentNode],
-										1000,
+								instagramMedia[i][parentNode][classList].add(
+									minigridItemIsBindedClass
+								);
+								triggerOnHeightChange(
+									instagramMedia[i][parentNode],
+									1000,
+									null,
+									setIsActiveClass.bind(
 										null,
-										setIsActiveClass.bind(
-											null,
-											instagramMedia[i][parentNode]
-										)
-									);
+										instagramMedia[i][parentNode]
+									)
+								);
 
-									instagramMedia[i][parentNode][
-										_addEventListener
-									]("onresize", updateMinigridThrottled, {
-										passive: true
-									});
-								}
+								instagramMedia[i][parentNode][
+									_addEventListener
+								]("onresize", updateMinigridThrottled, {
+									passive: true
+								});
 							}
-
-							i = l = null;
 						}
-					} catch (err) {
-						throw new Error("cannot instgrm.Embeds.process " + err);
+
+						i = l = null;
 					}
+				} catch (err) {
+					throw new Error("cannot instgrm.Embeds.process " + err);
 				}
 			};
 
 			if (instagramMedia) {
 				var jsUrl = forcedHTTP + "://www.instagram.com/embed.js";
 
-				if (!scriptIsLoaded(jsUrl)) {
+				if (!root.instgrm) {
 					var load;
 					load = new loadJsCss([jsUrl], initScript);
 				} else {
@@ -2512,59 +2450,54 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				document[getElementsByClassName]("twitter-tweet")[0] || "";
 
 			var initScript = function initScript() {
-				if (root.twttr) {
-					try {
-						var twitterTweet =
-							document[getElementsByClassName]("twitter-tweet") ||
-							"";
+				try {
+					var twitterTweet =
+						document[getElementsByClassName]("twitter-tweet") || "";
 
-						if (twitterTweet) {
-							twttr.widgets.load();
-							var i, l;
+					if (twitterTweet) {
+						twttr.widgets.load();
+						var i, l;
 
-							for (
-								i = 0, l = twitterTweet[_length];
-								i < l;
-								i += 1
+						for (i = 0, l = twitterTweet[_length]; i < l; i += 1) {
+							if (
+								!twitterTweet[i][parentNode][
+									classList
+								].contains(minigridItemIsBindedClass)
 							) {
-								if (
-									!twitterTweet[i][parentNode][
-										classList
-									].contains(minigridItemIsBindedClass)
-								) {
-									twitterTweet[i][parentNode][classList].add(
-										minigridItemIsBindedClass
-									);
-									triggerOnHeightChange(
-										twitterTweet[i][parentNode],
-										1000,
+								twitterTweet[i][parentNode][classList].add(
+									minigridItemIsBindedClass
+								);
+								triggerOnHeightChange(
+									twitterTweet[i][parentNode],
+									1000,
+									null,
+									setIsActiveClass.bind(
 										null,
-										setIsActiveClass.bind(
-											null,
-											twitterTweet[i][parentNode]
-										)
-									);
+										twitterTweet[i][parentNode]
+									)
+								);
 
-									twitterTweet[i][parentNode][
-										_addEventListener
-									]("onresize", updateMinigridThrottled, {
+								twitterTweet[i][parentNode][_addEventListener](
+									"onresize",
+									updateMinigridThrottled,
+									{
 										passive: true
-									});
-								}
+									}
+								);
 							}
-
-							i = l = null;
 						}
-					} catch (err) {
-						throw new Error("cannot twttr.widgets.load " + err);
+
+						i = l = null;
 					}
+				} catch (err) {
+					throw new Error("cannot twttr.widgets.load " + err);
 				}
 			};
 
 			if (twitterTweet) {
 				var jsUrl = forcedHTTP + "://platform.twitter.com/widgets.js";
 
-				if (!scriptIsLoaded(jsUrl)) {
+				if (!root.twttr) {
 					var load;
 					load = new loadJsCss([jsUrl], initScript);
 				} else {
@@ -2588,62 +2521,60 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 					}
 				};
 
-				if (root.VK && VK.Widgets && VK.Widgets.Post) {
-					try {
-						var vkPost =
-							document[getElementsByClassName]("vk-post") || "";
+				try {
+					var vkPost =
+						document[getElementsByClassName]("vk-post") || "";
 
-						if (vkPost) {
-							var i, l;
+					if (vkPost) {
+						var i, l;
 
-							for (i = 0, l = vkPost[_length]; i < l; i += 1) {
-								if (
-									!vkPost[i][parentNode][classList].contains(
-										minigridItemIsBindedClass
-									)
-								) {
-									vkPost[i][parentNode][classList].add(
-										minigridItemIsBindedClass
-									);
-									triggerOnHeightChange(
-										vkPost[i][parentNode],
-										1000,
+						for (i = 0, l = vkPost[_length]; i < l; i += 1) {
+							if (
+								!vkPost[i][parentNode][classList].contains(
+									minigridItemIsBindedClass
+								)
+							) {
+								vkPost[i][parentNode][classList].add(
+									minigridItemIsBindedClass
+								);
+								triggerOnHeightChange(
+									vkPost[i][parentNode],
+									1000,
+									null,
+									setIsActiveClass.bind(
 										null,
-										setIsActiveClass.bind(
-											null,
-											vkPost[i][parentNode]
-										)
-									);
+										vkPost[i][parentNode]
+									)
+								);
 
-									vkPost[i][parentNode][_addEventListener](
-										"onresize",
-										updateMinigridThrottled,
-										{
-											passive: true
-										}
-									);
+								vkPost[i][parentNode][_addEventListener](
+									"onresize",
+									updateMinigridThrottled,
+									{
+										passive: true
+									}
+								);
 
-									initVkPost(
-										vkPost[i].id,
-										vkPost[i][dataset].vkOwnerid,
-										vkPost[i][dataset].vkPostid,
-										vkPost[i][dataset].vkHash
-									);
-								}
+								initVkPost(
+									vkPost[i].id,
+									vkPost[i][dataset].vkOwnerid,
+									vkPost[i][dataset].vkPostid,
+									vkPost[i][dataset].vkHash
+								);
 							}
-
-							i = l = null;
 						}
-					} catch (err) {
-						throw new Error("cannot initVkPost " + err);
+
+						i = l = null;
 					}
+				} catch (err) {
+					throw new Error("cannot initVkPost " + err);
 				}
 			};
 
 			if (vkPost) {
 				var jsUrl = forcedHTTP + "://vk.com/js/api/openapi.js?154";
 
-				if (!scriptIsLoaded(jsUrl)) {
+				if (!(root.VK && VK.Widgets && VK.Widgets.Post)) {
 					var load;
 					load = new loadJsCss([jsUrl], initScript);
 				} else {
@@ -2652,7 +2583,6 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			}
 		};
 
-		var minigridItemClass = "minigrid__item";
 		appEvents.addListeners("MinigridInited", [
 			handleDataSrcIframeAll.bind(null, updateMinigridThrottled),
 			handleDataSrcImageAll.bind(null, updateMinigridThrottled),
@@ -2664,6 +2594,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			manageDisqusEmbed
 		]);
 		var minigridClass = "minigrid";
+		var minigridItemClass = "minigrid__item";
 
 		var initMinigrid = function initMinigrid() {
 			var minigrid =
@@ -2671,18 +2602,18 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 			if (minigrid) {
 				try {
-					if (mgrid) {
-						mgrid = null;
+					if (root.minigridInstance) {
+						root.minigridInstance = null;
 
 						root[_removeEventListener]("resize", updateMinigrid);
 					}
 
-					mgrid = new Minigrid({
+					root.minigridInstance = new Minigrid({
 						container: "." + minigridClass,
 						item: "." + minigridItemClass,
 						gutter: 20
 					});
-					mgrid.mount();
+					root.minigridInstance.mount();
 					minigrid[classList].add(isActiveClass);
 
 					root[_addEventListener]("resize", updateMinigrid, {
@@ -2698,14 +2629,15 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 		appEvents.addListeners("MinigridItemsFound", [initMinigrid]);
 
-		var manageMinigrid = function manageMinigrid() {
+		var manageMinigrid = function manageMinigrid(minigridClass) {
 			return new Promise(function(resolve, reject) {
 				var minigrid =
 					document[getElementsByClassName](minigridClass)[0] || "";
 
 				var handleMinigrid = function handleMinigrid() {
 					var minigridItem =
-						minigrid[getElementsByClassName](minigridItemClass) || "";
+						minigrid[getElementsByClassName](minigridItemClass) ||
+						"";
 					var minigridItemLength = minigridItem[_length] || 0;
 
 					if (
@@ -2715,7 +2647,9 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 						scroll2Top(1, 20000);
 						appEvents.emitEvent("MinigridItemsFound");
 						resolve(
-							"manageMinigrid: found " + minigridItemLength + " cards"
+							"manageMinigrid: found " +
+								minigridItemLength +
+								" cards"
 						);
 					} else {
 						reject("manageMinigrid: no cards found");
@@ -2728,7 +2662,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			});
 		};
 
-		var macy;
+		root.macyInstance = null;
 
 		var updateMacy = function updateMacy(delay) {
 			var timeout = delay || 100;
@@ -2738,13 +2672,13 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				console.log("updateMacy");
 			};
 
-			if (macy) {
+			if (root.macyInstance) {
 				var timer = setTimeout(function() {
 					clearTimeout(timer);
 					timer = null;
 					/* logThis(); */
 
-					macy.recalculate(true, true);
+					root.macyInstance.recalculate(true, true);
 				}, timeout);
 			}
 		};
@@ -2763,11 +2697,11 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 			if (macyContainer) {
 				try {
-					if (macy) {
-						macy.remove();
+					if (root.macyInstance) {
+						root.macyInstance.remove();
 					}
 
-					macy = new Macy({
+					root.macyInstance = new Macy({
 						container: "." + macyClass,
 						trueOrder: false,
 						waitForImages: false,
@@ -2792,7 +2726,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 		appEvents.addListeners("MacyImagesLoaded", [initMacy]);
 
-		var manageMacy = function manageMacy() {
+		var manageMacy = function manageMacy(macyClass) {
 			return new Promise(function(resolve, reject) {
 				var macyContainer =
 					document[getElementsByClassName](macyClass)[0] || "";
@@ -2920,10 +2854,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 
 					for (i = 0, l = link[_length]; i < l; i += 1) {
 						if (!link[i][classList].contains(isBindedClass)) {
-							link[i][_addEventListener](
-								"click",
-								hideSidedrawer
-							);
+							link[i][_addEventListener]("click", hideSidedrawer);
 
 							link[i][classList].add(isBindedClass);
 						}
@@ -3277,6 +3208,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 							: "");
 
 					if (appContentParent) {
+						highlightSidedrawerItem();
 						managePrevNextLinks(jsonObj);
 						manageExternalLinkAll();
 						manageImgLightboxLinkAll("img-lightbox-link");
@@ -3284,10 +3216,9 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 						manageDropdownButtonAll();
 						manageHljsCodeAll();
 						manageRippleEffect();
-						highlightSidedrawerItem();
 						manageReadMore();
 						manageExpandingLayers();
-						manageMacy()
+						manageMacy(macyClass)
 							.then(function(result) {
 								console.log(result);
 							})
@@ -3301,7 +3232,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 							.catch(function(err) {
 								console.log(err);
 							});
-						manageMinigrid()
+						manageMinigrid(minigridClass)
 							.then(function(result) {
 								console.log(result);
 							})
@@ -3337,11 +3268,11 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 		);
 	};
 	/* var scripts = [
-  			"../../fonts/roboto-fontfacekit/2.137/css/roboto.css",
-  			"../../fonts/roboto-mono-fontfacekit/2.0.986/css/roboto-mono.css",
-  			"../../cdn/mui/0.9.39/css/mui.css",
-  			"../../cdn/iframe-lightbox/0.2.8/css/iframe-lightbox.fixed.css",
-  			"../../cdn/img-lightbox/0.2.1/css/img-lightbox.fixed.css"
+  		"../../fonts/roboto-fontfacekit/2.137/css/roboto.css",
+  		"../../fonts/roboto-mono-fontfacekit/2.0.986/css/roboto-mono.css",
+  		"../../cdn/iframe-lightbox/0.2.8/css/iframe-lightbox.fixed.css",
+  		"../../cdn/img-lightbox/0.2.1/css/img-lightbox.fixed.css",
+  		"../../cdn/mui/0.9.39/css/mui.css"
   ]; */
 
 	var scripts = [
@@ -3414,18 +3345,17 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 		scripts.push("./cdn/polyfills/js/polyfills.fixed.min.js");
 	}
 	/* var scripts = [
-  			"./bower_components/iframe-lightbox/iframe-lightbox.js",
-  			"../../cdn/img-lightbox/0.2.1/js/img-lightbox.fixed.js",
-  			"../../cdn/qrjs2/0.1.7/js/qrjs2.fixed.js",
-  			"../../cdn/Tocca.js/2.0.1/js/Tocca.fixed.js",
-  			"../../cdn/wheel-indicator/1.1.4/js/wheel-indicator.fixed.js",
-  			"../../cdn/resize/1.0.0/js/any-resize-event.fixed.js",
-  			"./node_modules/macy/dist/macy.js",
-  			"../../cdn/mustache/2.3.0/js/mustache.fixed.js",
-  			"../../cdn/EventEmitter/5.2.5/js/EventEmitter.fixed.js",,
-  			"../../cdn/minigrid/3.1.1/js/minigrid.fixed.js",
-  			"../../cdn/ripple-js/1.4.4/js/ripple.fixed.js",
-  			"../../cdn/ReadMore.js/1.0.0/js/readMoreJS.fixed.js"
+  		"../../cdn/minigrid/3.1.1/js/minigrid.fixed.js",
+  		"../../cdn/ReadMore.js/1.0.0/js/readMoreJS.fixed.js",
+  		"../../cdn/ripple-js/1.4.4/js/ripple.fixed.js",
+  		"../../cdn/iframe-lightbox/0.2.8/js/iframe-lightbox.fixed.js",
+  		"../../cdn/img-lightbox/0.2.1/js/img-lightbox.fixed.js",
+  		"../../cdn/qrjs2/0.1.7/js/qrjs2.fixed.js",
+  		"../../cdn/Tocca.js/2.0.1/js/Tocca.fixed.js",
+  		"../../cdn/wheel-indicator/1.1.4/js/wheel-indicator.fixed.js",
+  		"../../cdn/resize/1.0.0/js/any-resize-event.fixed.js",
+  		"../../cdn/mustache/2.3.0/js/mustache.fixed.js",
+  		"../../cdn/EventEmitter/5.2.5/js/EventEmitter.fixed.js"
   ]; */
 
 	scripts.push("./libs/mytushino-muicss/js/vendors.min.js");
@@ -3448,7 +3378,6 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				clearInterval(slot);
 				slot = null;
 			}
-			/* progressBar.increase(20); */
 
 			var load;
 			load = new loadJsCss(scripts, run);

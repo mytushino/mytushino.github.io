@@ -383,8 +383,6 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 		var isActiveClass = "is-active";
 		var isBindedClass = "is-binded";
 
-		/* progressBar.increase(20); */
-
 		if (docElem && docElem[classList]) {
 			docElem[classList].remove("no-js");
 			docElem[classList].add("js");
@@ -514,20 +512,6 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			document[title] = document[title] + userBrowsingDetails;
 		}
 
-		var scriptIsLoaded = function (scriptSrc) {
-			var scriptAll,
-			i,
-			l;
-			for (scriptAll = document[getElementsByTagName]("script") || "", i = 0, l = scriptAll[_length]; i < l; i += 1) {
-				if (scriptAll[i][getAttribute]("src") === scriptSrc) {
-					scriptAll = i = l = null;
-					return true;
-				}
-			}
-			scriptAll = i = l = null;
-			return false;
-		};
-
 		var debounce = function (func, wait) {
 			var timeout;
 			var args;
@@ -615,18 +599,6 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 			tick();
 		};
 
-		var appendFragment = function (e, a) {
-			var parent = a || document[getElementsByTagName]("body")[0] || "";
-			if (e) {
-				var df = document[createDocumentFragment]() || "";
-				if ("string" === typeof e) {
-					e = document[createTextNode](e);
-				}
-				df[appendChild](e);
-				parent[appendChild](df);
-			}
-		};
-
 		var LoadingSpinner = (function () {
 			var spinner = document[getElementById]("loading-spinner") || "";
 			if (!spinner) {
@@ -654,6 +626,18 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				}
 			};
 		})();
+
+		var appendFragment = function (e, a) {
+			var parent = a || document[getElementsByTagName]("body")[0] || "";
+			if (e) {
+				var df = document[createDocumentFragment]() || "";
+				if ("string" === typeof e) {
+					e = document[createTextNode](e);
+				}
+				df[appendChild](e);
+				parent[appendChild](df);
+			}
+		};
 
 		var removeChildren = function (e) {
 			if (e && e.firstChild) {
@@ -2157,6 +2141,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				onContentInserted: function (jsonObj, titleString) {
 					document[title] = (titleString ? titleString + " - " : "") + (initialDocumentTitle ? initialDocumentTitle + (userBrowsingDetails ? userBrowsingDetails : "") : "");
 					if (appContentParent) {
+						highlightSidedrawerItem();
 						managePrevNextLinks(jsonObj);
 						manageExternalLinkAll();
 						manageImgLightboxLinkAll("img-lightbox-link");
@@ -2164,7 +2149,6 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 						manageDropdownButtonAll();
 						manageHljsCodeAll();
 						manageRippleEffect();
-						highlightSidedrawerItem();
 						manageReadMore();
 						manageExpandingLayers();
 						manageMacy(macyClass).then(function (result) {
@@ -2214,11 +2198,11 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 	};
 
 	/* var scripts = [
-				"../../fonts/roboto-fontfacekit/2.137/css/roboto.css",
-				"../../fonts/roboto-mono-fontfacekit/2.0.986/css/roboto-mono.css",
-				"../../cdn/mui/0.9.39/css/mui.css",
-				"../../cdn/iframe-lightbox/0.2.8/css/iframe-lightbox.fixed.css",
-				"../../cdn/img-lightbox/0.2.1/css/img-lightbox.fixed.css"
+			"../../fonts/roboto-fontfacekit/2.137/css/roboto.css",
+			"../../fonts/roboto-mono-fontfacekit/2.0.986/css/roboto-mono.css",
+			"../../cdn/iframe-lightbox/0.2.8/css/iframe-lightbox.fixed.css",
+			"../../cdn/img-lightbox/0.2.1/css/img-lightbox.fixed.css",
+			"../../cdn/mui/0.9.39/css/mui.css"
 	]; */
 
 	var scripts = [
@@ -2271,18 +2255,17 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 	}
 
 	/* var scripts = [
-				"./bower_components/iframe-lightbox/iframe-lightbox.js",
-				"../../cdn/img-lightbox/0.2.1/js/img-lightbox.fixed.js",
-				"../../cdn/qrjs2/0.1.7/js/qrjs2.fixed.js",
-				"../../cdn/Tocca.js/2.0.1/js/Tocca.fixed.js",
-				"../../cdn/wheel-indicator/1.1.4/js/wheel-indicator.fixed.js",
-				"../../cdn/resize/1.0.0/js/any-resize-event.fixed.js",
-				"./node_modules/macy/dist/macy.js",
-				"../../cdn/mustache/2.3.0/js/mustache.fixed.js",
-				"../../cdn/EventEmitter/5.2.5/js/EventEmitter.fixed.js",,
-				"../../cdn/minigrid/3.1.1/js/minigrid.fixed.js",
-				"../../cdn/ripple-js/1.4.4/js/ripple.fixed.js",
-				"../../cdn/ReadMore.js/1.0.0/js/readMoreJS.fixed.js"
+			"../../cdn/minigrid/3.1.1/js/minigrid.fixed.js",
+			"../../cdn/ReadMore.js/1.0.0/js/readMoreJS.fixed.js",
+			"../../cdn/ripple-js/1.4.4/js/ripple.fixed.js",
+			"../../cdn/iframe-lightbox/0.2.8/js/iframe-lightbox.fixed.js",
+			"../../cdn/img-lightbox/0.2.1/js/img-lightbox.fixed.js",
+			"../../cdn/qrjs2/0.1.7/js/qrjs2.fixed.js",
+			"../../cdn/Tocca.js/2.0.1/js/Tocca.fixed.js",
+			"../../cdn/wheel-indicator/1.1.4/js/wheel-indicator.fixed.js",
+			"../../cdn/resize/1.0.0/js/any-resize-event.fixed.js",
+			"../../cdn/mustache/2.3.0/js/mustache.fixed.js",
+			"../../cdn/EventEmitter/5.2.5/js/EventEmitter.fixed.js"
 	]; */
 
 	scripts.push("./libs/mytushino-muicss/js/vendors.min.js");
@@ -2307,9 +2290,7 @@ twttr, unescape, VK, WheelIndicator, Ya*/
 				slot = null;
 			}
 
-			/* progressBar.increase(20); */
-
-			var load;
+				var load;
 			load = new loadJsCss(scripts, run);
 		};
 

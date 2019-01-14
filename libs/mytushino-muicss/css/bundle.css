@@ -941,7 +941,8 @@ button {
 .minigrid__item.minigrid__item--skeleton .vk-post,
 .minigrid__item.minigrid__item--skeleton .instagram-media,
 .minigrid__item.minigrid__item--skeleton .twitter-tweet,
-.minigrid__item.minigrid__item--skeleton .instagram-media.instagram-media-rendered,
+.minigrid__item.minigrid__item--skeleton
+	.instagram-media.instagram-media-rendered,
 .minigrid__item.minigrid__item--skeleton .twitter-tweet.twitter-tweet-rendered {
 	margin: 0 !important;
 }
@@ -1903,7 +1904,6 @@ img.office-qrcode-img {
 	transition: transform 0.2s;
 	transition: transform 0.2s, -webkit-transform 0.2s;
 	-webkit-transform: translateZ(0);
-	-webkit-backface-visibility: hidden;
 	-webkit-box-shadow: 0 0.125rem 0.125rem 0 rgba(0, 0, 0, 0.16),
 		0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.12);
 	box-shadow: 0 0.125rem 0.125rem 0 rgba(0, 0, 0, 0.16),
@@ -2052,18 +2052,18 @@ img.office-qrcode-img {
  */
 /* .mui-appbar {
 	color: #FFFFFF;
-	background-color: $ButtonBackgroundDark;
+	background-color: $button-background-dark;
 }
 
 .mui-appbar .mui-dropdown__menu > li > a {
 	color: #FFFFFF;
-	background-color: $ButtonBackgroundDark;
+	background-color: $button-background-dark;
 }
 
 .mui-appbar .mui-dropdown__menu > li > a:focus,
 .mui-appbar .mui-dropdown__menu > li > a:hover,
 .mui-appbar .mui-dropdown__menu > li > a:active {
-	color: $ButtonBackgroundDark;
+	color: $button-background-dark;
 	background-color: $custom-color-highlight-hover;
 } */
 /*!

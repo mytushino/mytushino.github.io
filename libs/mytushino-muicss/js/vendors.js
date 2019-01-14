@@ -581,9 +581,9 @@
 					}
 				};
 
-				for (i = 0; i < rippleButtons.length; i++) {
-					var isBindedRippleClass = "ripple--is-binded";
+				var isBindedRippleClass = "ripple--is-binded";
 
+				for (i = 0; i < rippleButtons.length; i++) {
 					if (
 						!rippleButtons[i].classList.contains(
 							isBindedRippleClass
