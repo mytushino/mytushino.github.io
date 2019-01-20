@@ -2,21 +2,12 @@
 	"name": "mytushino-muicss-dev",
 	"version": "1.0.0",
 	"description": "Developing Business Directory of Severnoye and Yuzhnoye Tushino PWA with https://github.com/muicss/mui.",
-	"keywords": [
-		"english",
-		"webapp",
-		"spa",
-		"html",
-		"css",
-		"scss",
-		"js",
-		"pwa",
-		"material",
-		"material-design"
-	],
+	"keywords": ["spa",
+	"pwa",
+	"webapp"],
 	"main": "gulpfile.js",
 	"dependencies": {
-		"npm": "^6.5.0"
+		"npm": "^6.6.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.2.2",
@@ -45,23 +36,23 @@
 	"scripts": {
 		"test": "gulp lint-libbundle-js"
 	},
+	"main_file": "index.js",
+	"electronVersion": "4.0.0",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/englishextra/serguei-muicss-dev.git"
 	},
+	"email": "englishextra@mail.ru",
+	"url": "https://github.com/englishextra/qrjs/issues",
 	"maintainers": {
 		"name": "Serguei Shimansky",
 		"email": "englishextra@mail.ru",
 		"url": "https://github.com/englishextra"
 	},
 	"author": {
-		"name": "Serguei Shimansky",
+		"name": "englishextra",
 		"email": "englishextra@mail.ru",
 		"url": "https://github.com/englishextra"
 	},
-	"license": "(MIT)",
-	"bugs": {
-		"url": "https://github.com/englishextra/serguei-muicss-dev/issues"
-	},
-	"homepage": "https://github.com/englishextra/serguei-muicss-dev#readme"
+	"license": "(MIT)"
 }
