@@ -2,13 +2,13 @@
 	"name": "mytushino",
 	"version": "0.1.0",
 	"description": "A Portfolio Web App",
-	"keywords": [
-		"spa",
-		"pwa",
-		"webapp"
-	],
-	"main_file": "index.js",
-	"electronVersion": "4.0.0",
+	"keywords": ["spa",
+	"pwa",
+	"webapp"],
+	"main": "main.js",
+	"window": {
+		"icon": "favicon-32x32.png"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://gitlab.com/mytushino/mytushino.gitlab.io.git"
