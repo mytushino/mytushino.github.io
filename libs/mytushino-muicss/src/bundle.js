@@ -1973,6 +1973,8 @@ WheelIndicator, Ya*/
 
 		var macyClass = "macy";
 
+		var macyItemIsBindedClass = "macy__item--is-binded";
+
 		var macyIsActiveClass = "macy--is-active";
 
 		var initMacy = function () {
