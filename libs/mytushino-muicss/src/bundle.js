@@ -1925,7 +1925,7 @@ unescape, VK, WheelIndicator, Ya*/
 					if (!hasClass(disqusThread.parentNode.parentNode, disqusThreadIsBindedClass)) {
 						addClass(disqusThread.parentNode.parentNode, disqusThreadIsBindedClass);
 						console.log(disqusThread.parentNode.parentNode.className);
-						onHeightChange(disqusThread.parentNode, 1000, null, setIsActiveClass.bind(null, disqusThread.parentNode.parentNode));
+						onHeightChange(disqusThread.parentNode.parentNode, 1000, null, setIsActiveClass.bind(null, disqusThread));
 					}
 				} catch (err) {
 					throw new Error("cannot DISQUS.reset " + err);
