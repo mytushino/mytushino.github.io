@@ -2,9 +2,11 @@
 	"name": "mytushino",
 	"version": "0.1.0",
 	"description": "A Portfolio Web App",
-	"keywords": ["spa",
-	"pwa",
-	"webapp"],
+	"keywords": [
+		"spa",
+		"pwa",
+		"webapp"
+	],
 	"main": "main.js",
 	"window": {
 		"icon": "favicon-32x32.png"
@@ -14,7 +16,7 @@
 		"url": "https://gitlab.com/mytushino/mytushino.gitlab.io.git"
 	},
 	"dependencies": {
-		"npm": "^6.7.0"
+		"npm": "^6.9.0"
 	},
 	"devDependencies": {
 		"gulp": "^4.0.0",
