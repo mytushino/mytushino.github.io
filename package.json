@@ -16,7 +16,7 @@
 		"url": "https://gitlab.com/mytushino/mytushino.gitlab.io.git"
 	},
 	"dependencies": {
-		"npm": "^6.9.0"
+		"npm": "^6.10.2"
 	},
 	"devDependencies": {
 		"gulp": "^4.0.0",
