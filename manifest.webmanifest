@@ -1,7 +1,6 @@
 {
 	"name": "mytushino",
 	"short_name": "mytushino",
-	"manifest_version": 2,
 	"icons": [{
 		"src": "/android-chrome-192x192.png",
 		"sizes": "192x192",
@@ -18,13 +17,9 @@
 		"type": "image/png"
 	}],
 	"scope": "/",
-	"mjs_access_whitelist": [{
-		"url": "https://mytushino.github.io/"
-	}],
 	"start_url": "https://mytushino.github.io/",
 	"display": "standalone",
 	"orientation": "any",
-	"ms_TileColor": "#00CFC4",
 	"theme_color": "#00CFC4",
 	"background_color": "#00CFC4"
 }
