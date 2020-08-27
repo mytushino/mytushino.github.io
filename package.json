@@ -1,5 +1,5 @@
 {
-	"name": "mytushino",
+	"name": "mytushino.github.io",
 	"version": "0.1.0",
 	"description": "A Portfolio Web App",
 	"keywords": [
@@ -16,7 +16,7 @@
 		"url": "https://gitlab.com/mytushino/mytushino.gitlab.io.git"
 	},
 	"dependencies": {
-		"npm": "^6.10.2"
+		"npm": "^6.14.8"
 	},
 	"devDependencies": {
 		"gulp": "^4.0.0",
