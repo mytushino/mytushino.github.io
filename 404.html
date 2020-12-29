@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!-- 1. use /tools/modularscale/index.html?15&px&1.25,1.125&web&text for font size and line height
+2. lazyload images
+3. remove font face, display block, opacity 1, visibility visible in critical inline css
+4. set font display swap in font face in css -->
+<html class="no-js" lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<!-- <meta http-equiv="x-ua-compatible" content="ie=edge" /> -->
+		<!-- https://content-security-policy.com/ --><meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' 'unsafe-inline' https:; frame-src 'self' https:; media-src 'self' https:; img-src 'self' 'unsafe-inline' https: data:" />
+		<meta name="HandheldFriendly" content="True" />
+		<meta name="MobileOptimized" content="320" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="404 Not Found (Не найдено)" /><title>Страница не найдена</title>
+		<style>
+			body {
+				font-family: Roboto, sans-serif;
+				color: #212121 !important;/* mui.css has rgba(0, 0, 0, 0.87) body text */
+				background-color: #F2F2F2 !important;/* mui.css has white body background */
+				margin: 0;
+			}
+			a {
+				color: transparent;
+			}
+			[hidden],
+			button,
+			canvas,
+			img,
+			input[type^=text],
+			select,
+			svg,
+			template,
+			#sidedrawer li > strong + ul,
+			.minigrid__item img,
+			.minigrid__item iframe {
+				display: none;
+			}
+			html,
+			body {
+				height: 100%;
+			}
+			/*!
+				* hide before scripts and styles loaded
+				*/
+			#sidedrawer,
+			#header,
+			#footer,
+			#page {
+				visibility: hidden;
+				opacity: 0;
+			}
+		</style>
+		<link rel="stylesheet" href="/libs/mytushino-muicss/css/vendors.min.css" />
+		<link rel="stylesheet" href="/libs/mytushino-muicss/css/bundle.min.css" />
+		<noscript>
+			<link rel="stylesheet" href="/libs/mytushino-muicss/css/vendors.min.css" />
+			<link rel="stylesheet" href="/libs/mytushino-muicss/css/bundle.min.css" />
+			<style>
+				#sidedrawer,
+				#header,
+				#footer,
+				#page {
+					visibility: visible;
+					opacity: 1;
+				}
+				#sidedrawer li>strong+ul,
+				.minigrid__item img,
+				.minigrid__item iframe {
+					display: block;
+				}
+			</style>
+		</noscript>
+	</head>
+	<body>
+		<!-- https://haltersweb.github.io/Accessibility/svg.html --><svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" focusable="false">
+			<defs>
+				<symbol id="site-logo-icon" viewBox="0 0 136 64">
+					<path fill="#00CFC4" d="M21,12C10,12,1,21,1,32s9,20,20,20s20-9,20-20S32,12,21,12z"></path>
+					<circle fill="#FFFFFF" cx="21" cy="32" r="0.956"></circle>
+					<path fill="#FFFFFF" d="M24.632,33.181c0.545-1.68-0.134-3.463-1.545-4.384c1.024-0.938,2.214-3.091,3.073-5.738	c0.637-1.963,0.967-3.813,0.982-5.193c0.014-1.291-0.434-1.598-0.979-1.776c-0.545-0.177-1.088-0.192-1.835,0.86	c-0.798,1.126-1.617,2.817-2.254,4.779c-0.859,2.647-1.16,5.089-0.882,6.45c-1.682-0.086-3.279,0.957-3.824,2.637	c-0.545,1.68,0.134,3.463,1.545,4.384c-1.024,0.938-2.214,3.091-3.073,5.738c-0.637,1.963-0.967,3.813-0.982,5.193	c-0.014,1.291,0.434,1.598,0.979,1.776c0.545,0.177,1.088,0.192,1.835-0.86c0.798-1.126,1.617-2.817,2.254-4.779	c0.859-2.647,1.16-5.089,0.882-6.45C22.49,35.904,24.087,34.861,24.632,33.181z M20.41,33.818	c-1.003-0.326-1.552-1.405-1.226-2.409c0.326-1.004,1.403-1.554,2.406-1.227c1.003,0.326,1.552,1.405,1.226,2.409	C22.49,33.595,21.413,34.144,20.41,33.818z"></path>
+					<path fill="currentColor" d="M53.69,29.831c-0.563,0-1.025-0.091-1.389-0.272v-1.96c0.188,0.117,0.402,0.215,0.646,0.294	s0.474,0.119,0.69,0.119c0.457,0,0.853-0.149,1.187-0.448s0.694-0.858,1.081-1.679l-4.087-8.877h2.391l2.813,6.671h0.035	l2.698-6.671h2.215l-4.017,9.035c-0.645,1.436-1.283,2.426-1.916,2.971S54.622,29.831,53.69,29.831z"></path>
+					<path fill="currentColor" d="M68.359,29.233c-0.691,0.398-1.544,0.598-2.558,0.598c-0.867,0-1.64-0.188-2.315-0.563	c-0.678-0.375-1.205-0.908-1.582-1.6c-0.379-0.691-0.567-1.465-0.567-2.32c0-0.979,0.194-1.843,0.585-2.593	c0.389-0.75,0.954-1.332,1.695-1.745s1.602-0.62,2.58-0.62c0.381,0,0.776,0.042,1.187,0.127s0.735,0.195,0.976,0.33v1.925	c-0.662-0.48-1.354-0.721-2.074-0.721c-0.844,0-1.528,0.283-2.053,0.848s-0.786,1.32-0.786,2.263c0,0.938,0.252,1.673,0.756,2.206	s1.187,0.8,2.048,0.8c0.311,0,0.659-0.067,1.046-0.202s0.741-0.319,1.063-0.554V29.233z"></path>
+					<path fill="currentColor" d="M75.786,29.611v-7.365h-2.057c-0.193,1.957-0.438,3.457-0.734,4.5s-0.683,1.799-1.16,2.268	s-1.105,0.703-1.885,0.703c-0.422,0-0.727-0.035-0.914-0.105v-1.477c0.141,0.047,0.313,0.07,0.519,0.07	c0.445,0,0.818-0.249,1.12-0.747s0.562-1.277,0.778-2.338s0.419-2.563,0.606-4.509h5.757v9H75.786z"></path>
+					<path fill="currentColor" d="M80.831,33.839c-0.504,0-0.92-0.047-1.248-0.141v-1.732c0.322,0.146,0.653,0.22,0.993,0.22	c0.721,0,1.248-0.384,1.582-1.151l0.615-1.424l-3.604-9h2.285l2.312,6.952h0.035l2.391-6.952h2.065l-3.902,10.081	c-0.41,1.09-0.908,1.887-1.494,2.391C82.275,33.587,81.599,33.839,80.831,33.839z"></path>
+					<path fill="currentColor" d="M91.65,22.246v7.365h-2.03v-9h5.256v1.635H91.65z"></path>
+					<path fill="currentColor" d="M102.883,29.611V23.3l-4.658,6.311h-1.731v-9h1.925v6.135l4.518-6.135h1.854v9H102.883z"></path>
+					<path fill="currentColor" d="M60.607,41.948c0,0.826-0.267,1.477-0.8,1.951s-1.269,0.712-2.206,0.712h-4.702v-9h4.43	c0.967,0,1.7,0.183,2.202,0.549c0.5,0.366,0.751,0.91,0.751,1.631c0,0.527-0.166,0.977-0.497,1.349s-0.754,0.611-1.27,0.717	c0.645,0.076,1.154,0.303,1.529,0.681S60.607,41.386,60.607,41.948z M58.173,38.081c0-0.352-0.111-0.612-0.334-0.782	s-0.609-0.255-1.16-0.255H54.93v2.259h1.644c0.51,0,0.903-0.102,1.183-0.304C58.033,38.797,58.173,38.491,58.173,38.081z M58.48,41.948c0-0.832-0.577-1.248-1.731-1.248H54.93v2.443h1.951c0.533,0,0.933-0.094,1.199-0.281S58.48,42.37,58.48,41.948z"></path>
+					<path fill="currentColor" d="M71.611,33.81v10.802h-2.109V33.81H65.89v-1.802h9.343v1.802H71.611z"></path>
+					<path fill="currentColor" d="M75.751,48.839c-0.504,0-0.92-0.047-1.248-0.141v-1.731c0.322,0.146,0.653,0.22,0.993,0.22	c0.721,0,1.248-0.384,1.582-1.151l0.615-1.424l-3.604-9h2.285l2.312,6.952h0.035l2.391-6.952h2.065l-3.902,10.081	c-0.41,1.09-0.908,1.887-1.494,2.391S76.519,48.839,75.751,48.839z"></path>
+					<path fill="currentColor" d="M84.54,44.611v-9h2.03v7.365h3.067v-7.365h2.03v7.365h3.067v-7.365h2.03v9H84.54z"></path>
+					<path fill="currentColor" d="M105.845,44.611v-6.311l-4.658,6.311h-1.731v-9h1.925v6.135l4.518-6.135h1.854v9H105.845z"></path>
+					<path fill="currentColor" d="M116.462,44.611v-3.876h-3.99v3.876h-2.03v-9h2.03v3.489h3.99v-3.489h2.03v9H116.462z"></path>
+					<path fill="currentColor" d="M129.769,40.023c0,1.459-0.422,2.625-1.266,3.498s-1.989,1.31-3.437,1.31	c-1.389,0-2.495-0.415-3.317-1.244c-0.824-0.829-1.235-1.952-1.235-3.37c0-1.494,0.422-2.672,1.266-3.533s2.013-1.292,3.507-1.292	c1.406,0,2.505,0.411,3.296,1.234S129.769,38.582,129.769,40.023z M127.659,40.094c0-0.996-0.222-1.752-0.664-2.268	s-1.05-0.773-1.823-0.773c-0.797,0-1.421,0.27-1.872,0.809s-0.677,1.301-0.677,2.285c0,0.955,0.226,1.697,0.677,2.228	s1.081,0.796,1.89,0.796c0.814,0,1.43-0.261,1.846-0.782S127.659,41.102,127.659,40.094z"></path>
+				</symbol>
+				<symbol id="light-bulb-10" viewBox="0 0 24 24">
+					<path fill="currentColor" d="M19 6.734c0 4.164-3.75 6.98-3.75 10.266h-1.992c.001-2.079.996-3.826 1.968-5.513.913-1.585 1.774-3.083 1.774-4.753 0-3.108-2.518-4.734-5.004-4.734-2.482 0-4.996 1.626-4.996 4.734 0 1.67.861 3.168 1.774 4.753.972 1.687 1.966 3.434 1.967 5.513h-1.991c0-3.286-3.75-6.103-3.75-10.266 0-4.343 3.498-6.734 6.996-6.734 3.502 0 7.004 2.394 7.004 6.734zm-4 11.766c0 .276-.224.5-.5.5h-5c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h5c.276 0 .5.224.5.5zm0 2c0 .276-.224.5-.5.5h-5c-.276 0-.5-.224-.5-.5s.224-.5.5-.5h5c.276 0 .5.224.5.5zm-1.701 3.159c-.19.216-.465.341-.752.341h-1.094c-.287 0-.562-.125-.752-.341l-1.451-1.659h5.5l-1.451 1.659zm.607-16.647c.56 0 1.013-.454 1.013-1.013 0-.559-.453-1.013-1.013-1.013s-1.014.454-1.014 1.013c.001.56.455 1.013 1.014 1.013zm-3.812 0c.56 0 1.014-.454 1.014-1.013 0-.559-.454-1.013-1.014-1.013-.559 0-1.013.454-1.013 1.013 0 .56.454 1.013 1.013 1.013zm1.906 1.335c-1.303 0-2.33.805-3.027 1.591l.312.434c.755-.486 1.602-.784 2.715-.784s1.96.298 2.715.784l.312-.434c-.697-.787-1.724-1.591-3.027-1.591z"></path>
+				</symbol>
+			</defs>
+		</svg>
+		<header id="header">
+			<div id="appbar" class="mui-appbar mui-container-fluid mui--appbar-line-height">
+				<a href="/" class="site-logo" aria-label="Навигация" title="Начало">
+					<svg class="site-logo-icon" role="img" focusable="false">
+						<use xlink:href="#site-logo-icon"></use>
+					</svg>
+				</a>
+			</div>
+		</header>
+		<main>
+			<div class="page" id="page" role="document">
+				<div class="app-content" id="app-content"><div id="content-wrapper">
+	<div id="appbar-placeholder" class="mui--appbar-height"></div>
+	<div class="minigrid">
+		<div class="minigrid__item minigrid__item--heading">
+			<div class="minigrid__content"><h1 class="mui--text-display1">Страница не&#160;найдена</h1>
+				<p class="mui--text-subhead">Страницы, которую вы&#160;запросили, нет в&#160;базе данных. Ничего страшного.</p>
+			</div>
+		</div>
+		<div class="minigrid__item">
+			<div class="minigrid__content"><h2 class="mui--text-title">Кликни или тапни меня</h2>
+			</div>
+			<div class="minigrid__content"><a href="/" class="mui-btn large-btn-link ripple" aria-label="Навигация" title="Начало">
+				<svg class="large-btn-icon">
+					<use xlink:href="#light-bulb-10"></use>
+				</svg>
+			</a></div>
+		</div>
+	</div>
+</div>
+<template>
+	<footer id="footer">
+		<div class="mui-container-fluid">
+			<div class="mui-row">
+				<div class="mui-col-md-10 mui-col-md-offset-1 mui-col-sm-12 mui-col-sm-offset-0">
+					<div class="mui-col-xs-12 mui-col-md-12 mui-col-lg-12 mui-col-xl-12">
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</template>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

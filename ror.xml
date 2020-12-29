@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
+<channel>
+  <title>ROR Sitemap for https://mytushino.github.io/</title>
+  <link>https://mytushino.github.io/</link>
+
+<item>
+     <link>https://mytushino.github.io/</link>
+     <title>Английский в Тушино</title>
+     <description>Английский в Тушино</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>0</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+</channel>
+</rss>
+  

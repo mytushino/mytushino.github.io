@@ -1,0 +1,2 @@
+text fill should be currentColor
+logo colors stay the same
