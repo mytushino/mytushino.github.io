@@ -1,0 +1,2 @@
+font color should be #616161
+logo colors stay the same

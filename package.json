@@ -1,0 +1,44 @@
+{
+	"name": "mytushino.github.io",
+	"version": "0.1.0",
+	"description": "Business Directory of Severnoye and Yuzhnoye Tushino",
+	"keywords": [
+		"spa",
+		"pwa",
+		"webapp"
+	],
+	"main": "main.js",
+	"window": {
+		"icon": "favicon-32x32.png"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mytushino/mytushino.github.io.git"
+	},
+	"dependencies": {
+		"npm": "^7.3.0"
+	},
+	"devDependencies": {
+		"gulp": "^4.0.2",
+		"gulp-cli": "^2.3.0",
+		"gulp-eslint": "^6.0.0"
+	},
+	"scripts": {
+		"test": "gulp lint-libbundle-js"
+	},
+	"email": "englishextra@mail.ru",
+	"url": "https://github.com/mytushino/mytushino.github.io/issues",
+	"maintainers": [
+		{
+			"name": "Serguei Shimansky",
+			"email": "englishextra@mail.ru",
+			"url": "https://github.com/englishextra"
+		}
+	],
+	"author": {
+		"name": "Serguei Shimansky",
+		"email": "englishextra@mail.ru",
+		"url": "https://github.com/englishextra"
+	},
+	"license": "(MIT)"
+}
