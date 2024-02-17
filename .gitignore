@@ -8,3 +8,6 @@ node_modules/
 package-lock.json
 *.sublime-project
 *.sublime-workspace
+sw.js
+sw.min.js
+sw.min.js.map
